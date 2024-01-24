@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "tidyverseIntenso"
+  title: "Intensivo em `tidyverse`"
   author: "Marcel Ferreira"
   date: "24/01/2024"
   chapters:
