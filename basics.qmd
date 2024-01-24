@@ -1,0 +1,72 @@
+## Tidyverse basics
+
+## `{dplyr}` verbs
+
+-   `mutate`
+
+-   `filter`
+
+-   `select`
+
+-   `arrange`
+
+-   `summarise`
+
+```{r}
+iris
+```
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+dplyr::glimpse(iris)
+```
+
+### mutate
+
+$$
+A=\pi lw
+$$
+
+```{r}
+mutate(.data = iris, area_Sepal = pi*Sepal.Length*Sepal.Width)
+```
+
+```{r}
+iris %>% mutate(area_Sepal = pi*Sepal.Length*Sepal.Width)
+```
+
+Você errou a coluna `petal.lenght` e precisa multiplicar por 2.
+
+```{r}
+iris %>% mutate(Petal.Length = Petal.Length*2)
+```
+
+Usando informações externas
+
+```{r}
+iris %>% mutate(reino = "planta")
+```
+
+```{r,eval=FALSE}
+iris %>% mutate(reino = c("planta","fungo"))
+```
+
+```{r}
+iris %>% mutate(reino = 1:150)
+```
+
+```{r}
+iris %>% mutate(reino = rep(LETTERS[1:5],30))
+```
+
+```{r}
+iris %>% mutate(Code = paste("spc",Species,Petal.Length,Petal.Width,
+                             sep = '_'))
+```
+
+```{r}
+iris %>% mutate(Code = glue:::glue("Spc:{Species}_Len:{Petal.Length}_Wid:{Petal.Width}"))
+```

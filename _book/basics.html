@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>tidyverseIntenso - 2&nbsp; Tidyverse basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidyverse basics</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">tidyverseIntenso</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidyverse basics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dplyr-verbs" id="toc-dplyr-verbs" class="nav-link active" data-scroll-target="#dplyr-verbs"><span class="header-section-number">2.1</span> <code>{dplyr}</code> verbs</a>
+  <ul class="collapse">
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><span class="header-section-number">2.1.1</span> mutate</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tidyverse basics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="dplyr-verbs" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="dplyr-verbs"><span class="header-section-number">2.1</span> <code>{dplyr}</code> verbs</h2>
+<ul>
+<li><p><code>mutate</code></p></li>
+<li><p><code>filter</code></p></li>
+<li><p><code>select</code></p></li>
+<li><p><code>arrange</code></p></li>
+<li><p><code>summarise</code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            5.1         3.5          1.4         0.2     setosa
+2            4.9         3.0          1.4         0.2     setosa
+3            4.7         3.2          1.3         0.2     setosa
+4            4.6         3.1          1.5         0.2     setosa
+5            5.0         3.6          1.4         0.2     setosa
+6            5.4         3.9          1.7         0.4     setosa
+7            4.6         3.4          1.4         0.3     setosa
+8            5.0         3.4          1.5         0.2     setosa
+9            4.4         2.9          1.4         0.2     setosa
+10           4.9         3.1          1.5         0.1     setosa
+11           5.4         3.7          1.5         0.2     setosa
+12           4.8         3.4          1.6         0.2     setosa
+13           4.8         3.0          1.4         0.1     setosa
+14           4.3         3.0          1.1         0.1     setosa
+15           5.8         4.0          1.2         0.2     setosa
+16           5.7         4.4          1.5         0.4     setosa
+17           5.4         3.9          1.3         0.4     setosa
+18           5.1         3.5          1.4         0.3     setosa
+19           5.7         3.8          1.7         0.3     setosa
+20           5.1         3.8          1.5         0.3     setosa
+21           5.4         3.4          1.7         0.2     setosa
+22           5.1         3.7          1.5         0.4     setosa
+23           4.6         3.6          1.0         0.2     setosa
+24           5.1         3.3          1.7         0.5     setosa
+25           4.8         3.4          1.9         0.2     setosa
+26           5.0         3.0          1.6         0.2     setosa
+27           5.0         3.4          1.6         0.4     setosa
+28           5.2         3.5          1.5         0.2     setosa
+29           5.2         3.4          1.4         0.2     setosa
+30           4.7         3.2          1.6         0.2     setosa
+31           4.8         3.1          1.6         0.2     setosa
+32           5.4         3.4          1.5         0.4     setosa
+33           5.2         4.1          1.5         0.1     setosa
+34           5.5         4.2          1.4         0.2     setosa
+35           4.9         3.1          1.5         0.2     setosa
+36           5.0         3.2          1.2         0.2     setosa
+37           5.5         3.5          1.3         0.2     setosa
+38           4.9         3.6          1.4         0.1     setosa
+39           4.4         3.0          1.3         0.2     setosa
+40           5.1         3.4          1.5         0.2     setosa
+41           5.0         3.5          1.3         0.3     setosa
+42           4.5         2.3          1.3         0.3     setosa
+43           4.4         3.2          1.3         0.2     setosa
+44           5.0         3.5          1.6         0.6     setosa
+45           5.1         3.8          1.9         0.4     setosa
+46           4.8         3.0          1.4         0.3     setosa
+47           5.1         3.8          1.6         0.2     setosa
+48           4.6         3.2          1.4         0.2     setosa
+49           5.3         3.7          1.5         0.2     setosa
+50           5.0         3.3          1.4         0.2     setosa
+51           7.0         3.2          4.7         1.4 versicolor
+52           6.4         3.2          4.5         1.5 versicolor
+53           6.9         3.1          4.9         1.5 versicolor
+54           5.5         2.3          4.0         1.3 versicolor
+55           6.5         2.8          4.6         1.5 versicolor
+56           5.7         2.8          4.5         1.3 versicolor
+57           6.3         3.3          4.7         1.6 versicolor
+58           4.9         2.4          3.3         1.0 versicolor
+59           6.6         2.9          4.6         1.3 versicolor
+60           5.2         2.7          3.9         1.4 versicolor
+61           5.0         2.0          3.5         1.0 versicolor
+62           5.9         3.0          4.2         1.5 versicolor
+63           6.0         2.2          4.0         1.0 versicolor
+64           6.1         2.9          4.7         1.4 versicolor
+65           5.6         2.9          3.6         1.3 versicolor
+66           6.7         3.1          4.4         1.4 versicolor
+67           5.6         3.0          4.5         1.5 versicolor
+68           5.8         2.7          4.1         1.0 versicolor
+69           6.2         2.2          4.5         1.5 versicolor
+70           5.6         2.5          3.9         1.1 versicolor
+71           5.9         3.2          4.8         1.8 versicolor
+72           6.1         2.8          4.0         1.3 versicolor
+73           6.3         2.5          4.9         1.5 versicolor
+74           6.1         2.8          4.7         1.2 versicolor
+75           6.4         2.9          4.3         1.3 versicolor
+76           6.6         3.0          4.4         1.4 versicolor
+77           6.8         2.8          4.8         1.4 versicolor
+78           6.7         3.0          5.0         1.7 versicolor
+79           6.0         2.9          4.5         1.5 versicolor
+80           5.7         2.6          3.5         1.0 versicolor
+81           5.5         2.4          3.8         1.1 versicolor
+82           5.5         2.4          3.7         1.0 versicolor
+83           5.8         2.7          3.9         1.2 versicolor
+84           6.0         2.7          5.1         1.6 versicolor
+85           5.4         3.0          4.5         1.5 versicolor
+86           6.0         3.4          4.5         1.6 versicolor
+87           6.7         3.1          4.7         1.5 versicolor
+88           6.3         2.3          4.4         1.3 versicolor
+89           5.6         3.0          4.1         1.3 versicolor
+90           5.5         2.5          4.0         1.3 versicolor
+91           5.5         2.6          4.4         1.2 versicolor
+92           6.1         3.0          4.6         1.4 versicolor
+93           5.8         2.6          4.0         1.2 versicolor
+94           5.0         2.3          3.3         1.0 versicolor
+95           5.6         2.7          4.2         1.3 versicolor
+96           5.7         3.0          4.2         1.2 versicolor
+97           5.7         2.9          4.2         1.3 versicolor
+98           6.2         2.9          4.3         1.3 versicolor
+99           5.1         2.5          3.0         1.1 versicolor
+100          5.7         2.8          4.1         1.3 versicolor
+101          6.3         3.3          6.0         2.5  virginica
+102          5.8         2.7          5.1         1.9  virginica
+103          7.1         3.0          5.9         2.1  virginica
+104          6.3         2.9          5.6         1.8  virginica
+105          6.5         3.0          5.8         2.2  virginica
+106          7.6         3.0          6.6         2.1  virginica
+107          4.9         2.5          4.5         1.7  virginica
+108          7.3         2.9          6.3         1.8  virginica
+109          6.7         2.5          5.8         1.8  virginica
+110          7.2         3.6          6.1         2.5  virginica
+111          6.5         3.2          5.1         2.0  virginica
+112          6.4         2.7          5.3         1.9  virginica
+113          6.8         3.0          5.5         2.1  virginica
+114          5.7         2.5          5.0         2.0  virginica
+115          5.8         2.8          5.1         2.4  virginica
+116          6.4         3.2          5.3         2.3  virginica
+117          6.5         3.0          5.5         1.8  virginica
+118          7.7         3.8          6.7         2.2  virginica
+119          7.7         2.6          6.9         2.3  virginica
+120          6.0         2.2          5.0         1.5  virginica
+121          6.9         3.2          5.7         2.3  virginica
+122          5.6         2.8          4.9         2.0  virginica
+123          7.7         2.8          6.7         2.0  virginica
+124          6.3         2.7          4.9         1.8  virginica
+125          6.7         3.3          5.7         2.1  virginica
+126          7.2         3.2          6.0         1.8  virginica
+127          6.2         2.8          4.8         1.8  virginica
+128          6.1         3.0          4.9         1.8  virginica
+129          6.4         2.8          5.6         2.1  virginica
+130          7.2         3.0          5.8         1.6  virginica
+131          7.4         2.8          6.1         1.9  virginica
+132          7.9         3.8          6.4         2.0  virginica
+133          6.4         2.8          5.6         2.2  virginica
+134          6.3         2.8          5.1         1.5  virginica
+135          6.1         2.6          5.6         1.4  virginica
+136          7.7         3.0          6.1         2.3  virginica
+137          6.3         3.4          5.6         2.4  virginica
+138          6.4         3.1          5.5         1.8  virginica
+139          6.0         3.0          4.8         1.8  virginica
+140          6.9         3.1          5.4         2.1  virginica
+141          6.7         3.1          5.6         2.4  virginica
+142          6.9         3.1          5.1         2.3  virginica
+143          5.8         2.7          5.1         1.9  virginica
+144          6.8         3.2          5.9         2.3  virginica
+145          6.7         3.3          5.7         2.5  virginica
+146          6.7         3.0          5.2         2.3  virginica
+147          6.3         2.5          5.0         1.9  virginica
+148          6.5         3.0          5.2         2.0  virginica
+149          6.2         3.4          5.4         2.3  virginica
+150          5.9         3.0          5.1         1.8  virginica</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 150
+Columns: 5
+$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.~
+$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.~
+$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.~
+$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.~
+$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s~</code></pre>
+</div>
+</div>
+<section id="mutate" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="mutate"><span class="header-section-number">2.1.1</span> mutate</h3>
+<p><span class="math display">\[
+A=\pi lw
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">.data =</span> iris, <span class="at">area_Sepal =</span> pi<span class="sc">*</span>Sepal.Length<span class="sc">*</span>Sepal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species area_Sepal
+1            5.1         3.5          1.4         0.2     setosa   56.07743
+2            4.9         3.0          1.4         0.2     setosa   46.18141
+3            4.7         3.2          1.3         0.2     setosa   47.24955
+4            4.6         3.1          1.5         0.2     setosa   44.79911
+5            5.0         3.6          1.4         0.2     setosa   56.54867
+6            5.4         3.9          1.7         0.4     setosa   66.16194
+7            4.6         3.4          1.4         0.3     setosa   49.13451
+8            5.0         3.4          1.5         0.2     setosa   53.40708
+9            4.4         2.9          1.4         0.2     setosa   40.08672
+10           4.9         3.1          1.5         0.1     setosa   47.72079
+11           5.4         3.7          1.5         0.2     setosa   62.76902
+12           4.8         3.4          1.6         0.2     setosa   51.27079
+13           4.8         3.0          1.4         0.1     setosa   45.23893
+14           4.3         3.0          1.1         0.1     setosa   40.52655
+15           5.8         4.0          1.2         0.2     setosa   72.88495
+16           5.7         4.4          1.5         0.4     setosa   78.79114
+17           5.4         3.9          1.3         0.4     setosa   66.16194
+18           5.1         3.5          1.4         0.3     setosa   56.07743
+19           5.7         3.8          1.7         0.3     setosa   68.04690
+20           5.1         3.8          1.5         0.3     setosa   60.88407
+21           5.4         3.4          1.7         0.2     setosa   57.67964
+22           5.1         3.7          1.5         0.4     setosa   59.28185
+23           4.6         3.6          1.0         0.2     setosa   52.02477
+24           5.1         3.3          1.7         0.5     setosa   52.87300
+25           4.8         3.4          1.9         0.2     setosa   51.27079
+26           5.0         3.0          1.6         0.2     setosa   47.12389
+27           5.0         3.4          1.6         0.4     setosa   53.40708
+28           5.2         3.5          1.5         0.2     setosa   57.17699
+29           5.2         3.4          1.4         0.2     setosa   55.54336
+30           4.7         3.2          1.6         0.2     setosa   47.24955
+31           4.8         3.1          1.6         0.2     setosa   46.74690
+32           5.4         3.4          1.5         0.4     setosa   57.67964
+33           5.2         4.1          1.5         0.1     setosa   66.97876
+34           5.5         4.2          1.4         0.2     setosa   72.57079
+35           4.9         3.1          1.5         0.2     setosa   47.72079
+36           5.0         3.2          1.2         0.2     setosa   50.26548
+37           5.5         3.5          1.3         0.2     setosa   60.47566
+38           4.9         3.6          1.4         0.1     setosa   55.41769
+39           4.4         3.0          1.3         0.2     setosa   41.46902
+40           5.1         3.4          1.5         0.2     setosa   54.47522
+41           5.0         3.5          1.3         0.3     setosa   54.97787
+42           4.5         2.3          1.3         0.3     setosa   32.51548
+43           4.4         3.2          1.3         0.2     setosa   44.23362
+44           5.0         3.5          1.6         0.6     setosa   54.97787
+45           5.1         3.8          1.9         0.4     setosa   60.88407
+46           4.8         3.0          1.4         0.3     setosa   45.23893
+47           5.1         3.8          1.6         0.2     setosa   60.88407
+48           4.6         3.2          1.4         0.2     setosa   46.24424
+49           5.3         3.7          1.5         0.2     setosa   61.60663
+50           5.0         3.3          1.4         0.2     setosa   51.83628
+51           7.0         3.2          4.7         1.4 versicolor   70.37168
+52           6.4         3.2          4.5         1.5 versicolor   64.33982
+53           6.9         3.1          4.9         1.5 versicolor   67.19867
+54           5.5         2.3          4.0         1.3 versicolor   39.74115
+55           6.5         2.8          4.6         1.5 versicolor   57.17699
+56           5.7         2.8          4.5         1.3 versicolor   50.13982
+57           6.3         3.3          4.7         1.6 versicolor   65.31371
+58           4.9         2.4          3.3         1.0 versicolor   36.94513
+59           6.6         2.9          4.6         1.3 versicolor   60.13008
+60           5.2         2.7          3.9         1.4 versicolor   44.10796
+61           5.0         2.0          3.5         1.0 versicolor   31.41593
+62           5.9         3.0          4.2         1.5 versicolor   55.60619
+63           6.0         2.2          4.0         1.0 versicolor   41.46902
+64           6.1         2.9          4.7         1.4 versicolor   55.57477
+65           5.6         2.9          3.6         1.3 versicolor   51.01946
+66           6.7         3.1          4.4         1.4 versicolor   65.25088
+67           5.6         3.0          4.5         1.5 versicolor   52.77876
+68           5.8         2.7          4.1         1.0 versicolor   49.19734
+69           6.2         2.2          4.5         1.5 versicolor   42.85132
+70           5.6         2.5          3.9         1.1 versicolor   43.98230
+71           5.9         3.2          4.8         1.8 versicolor   59.31327
+72           6.1         2.8          4.0         1.3 versicolor   53.65840
+73           6.3         2.5          4.9         1.5 versicolor   49.48008
+74           6.1         2.8          4.7         1.2 versicolor   53.65840
+75           6.4         2.9          4.3         1.3 versicolor   58.30796
+76           6.6         3.0          4.4         1.4 versicolor   62.20353
+77           6.8         2.8          4.8         1.4 versicolor   59.81592
+78           6.7         3.0          5.0         1.7 versicolor   63.14601
+79           6.0         2.9          4.5         1.5 versicolor   54.66371
+80           5.7         2.6          3.5         1.0 versicolor   46.55840
+81           5.5         2.4          3.8         1.1 versicolor   41.46902
+82           5.5         2.4          3.7         1.0 versicolor   41.46902
+83           5.8         2.7          3.9         1.2 versicolor   49.19734
+84           6.0         2.7          5.1         1.6 versicolor   50.89380
+85           5.4         3.0          4.5         1.5 versicolor   50.89380
+86           6.0         3.4          4.5         1.6 versicolor   64.08849
+87           6.7         3.1          4.7         1.5 versicolor   65.25088
+88           6.3         2.3          4.4         1.3 versicolor   45.52168
+89           5.6         3.0          4.1         1.3 versicolor   52.77876
+90           5.5         2.5          4.0         1.3 versicolor   43.19690
+91           5.5         2.6          4.4         1.2 versicolor   44.92477
+92           6.1         3.0          4.6         1.4 versicolor   57.49115
+93           5.8         2.6          4.0         1.2 versicolor   47.37522
+94           5.0         2.3          3.3         1.0 versicolor   36.12832
+95           5.6         2.7          4.2         1.3 versicolor   47.50088
+96           5.7         3.0          4.2         1.2 versicolor   53.72123
+97           5.7         2.9          4.2         1.3 versicolor   51.93053
+98           6.2         2.9          4.3         1.3 versicolor   56.48584
+99           5.1         2.5          3.0         1.1 versicolor   40.05531
+100          5.7         2.8          4.1         1.3 versicolor   50.13982
+101          6.3         3.3          6.0         2.5  virginica   65.31371
+102          5.8         2.7          5.1         1.9  virginica   49.19734
+103          7.1         3.0          5.9         2.1  virginica   66.91592
+104          6.3         2.9          5.6         1.8  virginica   57.39690
+105          6.5         3.0          5.8         2.2  virginica   61.26106
+106          7.6         3.0          6.6         2.1  virginica   71.62831
+107          4.9         2.5          4.5         1.7  virginica   38.48451
+108          7.3         2.9          6.3         1.8  virginica   66.50752
+109          6.7         2.5          5.8         1.8  virginica   52.62168
+110          7.2         3.6          6.1         2.5  virginica   81.43008
+111          6.5         3.2          5.1         2.0  virginica   65.34513
+112          6.4         2.7          5.3         1.9  virginica   54.28672
+113          6.8         3.0          5.5         2.1  virginica   64.08849
+114          5.7         2.5          5.0         2.0  virginica   44.76770
+115          5.8         2.8          5.1         2.4  virginica   51.01946
+116          6.4         3.2          5.3         2.3  virginica   64.33982
+117          6.5         3.0          5.5         1.8  virginica   61.26106
+118          7.7         3.8          6.7         2.2  virginica   91.92300
+119          7.7         2.6          6.9         2.3  virginica   62.89468
+120          6.0         2.2          5.0         1.5  virginica   41.46902
+121          6.9         3.2          5.7         2.3  virginica   69.36637
+122          5.6         2.8          4.9         2.0  virginica   49.26017
+123          7.7         2.8          6.7         2.0  virginica   67.73274
+124          6.3         2.7          4.9         1.8  virginica   53.43849
+125          6.7         3.3          5.7         2.1  virginica   69.46061
+126          7.2         3.2          6.0         1.8  virginica   72.38229
+127          6.2         2.8          4.8         1.8  virginica   54.53805
+128          6.1         3.0          4.9         1.8  virginica   57.49115
+129          6.4         2.8          5.6         2.1  virginica   56.29734
+130          7.2         3.0          5.8         1.6  virginica   67.85840
+131          7.4         2.8          6.1         1.9  virginica   65.09380
+132          7.9         3.8          6.4         2.0  virginica   94.31061
+133          6.4         2.8          5.6         2.2  virginica   56.29734
+134          6.3         2.8          5.1         1.5  virginica   55.41769
+135          6.1         2.6          5.6         1.4  virginica   49.82566
+136          7.7         3.0          6.1         2.3  virginica   72.57079
+137          6.3         3.4          5.6         2.4  virginica   67.29291
+138          6.4         3.1          5.5         1.8  virginica   62.32920
+139          6.0         3.0          4.8         1.8  virginica   56.54867
+140          6.9         3.1          5.4         2.1  virginica   67.19867
+141          6.7         3.1          5.6         2.4  virginica   65.25088
+142          6.9         3.1          5.1         2.3  virginica   67.19867
+143          5.8         2.7          5.1         1.9  virginica   49.19734
+144          6.8         3.2          5.9         2.3  virginica   68.36106
+145          6.7         3.3          5.7         2.5  virginica   69.46061
+146          6.7         3.0          5.2         2.3  virginica   63.14601
+147          6.3         2.5          5.0         1.9  virginica   49.48008
+148          6.5         3.0          5.2         2.0  virginica   61.26106
+149          6.2         3.4          5.4         2.3  virginica   66.22477
+150          5.9         3.0          5.1         1.8  virginica   55.60619</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">area_Sepal =</span> pi<span class="sc">*</span>Sepal.Length<span class="sc">*</span>Sepal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species area_Sepal
+1            5.1         3.5          1.4         0.2     setosa   56.07743
+2            4.9         3.0          1.4         0.2     setosa   46.18141
+3            4.7         3.2          1.3         0.2     setosa   47.24955
+4            4.6         3.1          1.5         0.2     setosa   44.79911
+5            5.0         3.6          1.4         0.2     setosa   56.54867
+6            5.4         3.9          1.7         0.4     setosa   66.16194
+7            4.6         3.4          1.4         0.3     setosa   49.13451
+8            5.0         3.4          1.5         0.2     setosa   53.40708
+9            4.4         2.9          1.4         0.2     setosa   40.08672
+10           4.9         3.1          1.5         0.1     setosa   47.72079
+11           5.4         3.7          1.5         0.2     setosa   62.76902
+12           4.8         3.4          1.6         0.2     setosa   51.27079
+13           4.8         3.0          1.4         0.1     setosa   45.23893
+14           4.3         3.0          1.1         0.1     setosa   40.52655
+15           5.8         4.0          1.2         0.2     setosa   72.88495
+16           5.7         4.4          1.5         0.4     setosa   78.79114
+17           5.4         3.9          1.3         0.4     setosa   66.16194
+18           5.1         3.5          1.4         0.3     setosa   56.07743
+19           5.7         3.8          1.7         0.3     setosa   68.04690
+20           5.1         3.8          1.5         0.3     setosa   60.88407
+21           5.4         3.4          1.7         0.2     setosa   57.67964
+22           5.1         3.7          1.5         0.4     setosa   59.28185
+23           4.6         3.6          1.0         0.2     setosa   52.02477
+24           5.1         3.3          1.7         0.5     setosa   52.87300
+25           4.8         3.4          1.9         0.2     setosa   51.27079
+26           5.0         3.0          1.6         0.2     setosa   47.12389
+27           5.0         3.4          1.6         0.4     setosa   53.40708
+28           5.2         3.5          1.5         0.2     setosa   57.17699
+29           5.2         3.4          1.4         0.2     setosa   55.54336
+30           4.7         3.2          1.6         0.2     setosa   47.24955
+31           4.8         3.1          1.6         0.2     setosa   46.74690
+32           5.4         3.4          1.5         0.4     setosa   57.67964
+33           5.2         4.1          1.5         0.1     setosa   66.97876
+34           5.5         4.2          1.4         0.2     setosa   72.57079
+35           4.9         3.1          1.5         0.2     setosa   47.72079
+36           5.0         3.2          1.2         0.2     setosa   50.26548
+37           5.5         3.5          1.3         0.2     setosa   60.47566
+38           4.9         3.6          1.4         0.1     setosa   55.41769
+39           4.4         3.0          1.3         0.2     setosa   41.46902
+40           5.1         3.4          1.5         0.2     setosa   54.47522
+41           5.0         3.5          1.3         0.3     setosa   54.97787
+42           4.5         2.3          1.3         0.3     setosa   32.51548
+43           4.4         3.2          1.3         0.2     setosa   44.23362
+44           5.0         3.5          1.6         0.6     setosa   54.97787
+45           5.1         3.8          1.9         0.4     setosa   60.88407
+46           4.8         3.0          1.4         0.3     setosa   45.23893
+47           5.1         3.8          1.6         0.2     setosa   60.88407
+48           4.6         3.2          1.4         0.2     setosa   46.24424
+49           5.3         3.7          1.5         0.2     setosa   61.60663
+50           5.0         3.3          1.4         0.2     setosa   51.83628
+51           7.0         3.2          4.7         1.4 versicolor   70.37168
+52           6.4         3.2          4.5         1.5 versicolor   64.33982
+53           6.9         3.1          4.9         1.5 versicolor   67.19867
+54           5.5         2.3          4.0         1.3 versicolor   39.74115
+55           6.5         2.8          4.6         1.5 versicolor   57.17699
+56           5.7         2.8          4.5         1.3 versicolor   50.13982
+57           6.3         3.3          4.7         1.6 versicolor   65.31371
+58           4.9         2.4          3.3         1.0 versicolor   36.94513
+59           6.6         2.9          4.6         1.3 versicolor   60.13008
+60           5.2         2.7          3.9         1.4 versicolor   44.10796
+61           5.0         2.0          3.5         1.0 versicolor   31.41593
+62           5.9         3.0          4.2         1.5 versicolor   55.60619
+63           6.0         2.2          4.0         1.0 versicolor   41.46902
+64           6.1         2.9          4.7         1.4 versicolor   55.57477
+65           5.6         2.9          3.6         1.3 versicolor   51.01946
+66           6.7         3.1          4.4         1.4 versicolor   65.25088
+67           5.6         3.0          4.5         1.5 versicolor   52.77876
+68           5.8         2.7          4.1         1.0 versicolor   49.19734
+69           6.2         2.2          4.5         1.5 versicolor   42.85132
+70           5.6         2.5          3.9         1.1 versicolor   43.98230
+71           5.9         3.2          4.8         1.8 versicolor   59.31327
+72           6.1         2.8          4.0         1.3 versicolor   53.65840
+73           6.3         2.5          4.9         1.5 versicolor   49.48008
+74           6.1         2.8          4.7         1.2 versicolor   53.65840
+75           6.4         2.9          4.3         1.3 versicolor   58.30796
+76           6.6         3.0          4.4         1.4 versicolor   62.20353
+77           6.8         2.8          4.8         1.4 versicolor   59.81592
+78           6.7         3.0          5.0         1.7 versicolor   63.14601
+79           6.0         2.9          4.5         1.5 versicolor   54.66371
+80           5.7         2.6          3.5         1.0 versicolor   46.55840
+81           5.5         2.4          3.8         1.1 versicolor   41.46902
+82           5.5         2.4          3.7         1.0 versicolor   41.46902
+83           5.8         2.7          3.9         1.2 versicolor   49.19734
+84           6.0         2.7          5.1         1.6 versicolor   50.89380
+85           5.4         3.0          4.5         1.5 versicolor   50.89380
+86           6.0         3.4          4.5         1.6 versicolor   64.08849
+87           6.7         3.1          4.7         1.5 versicolor   65.25088
+88           6.3         2.3          4.4         1.3 versicolor   45.52168
+89           5.6         3.0          4.1         1.3 versicolor   52.77876
+90           5.5         2.5          4.0         1.3 versicolor   43.19690
+91           5.5         2.6          4.4         1.2 versicolor   44.92477
+92           6.1         3.0          4.6         1.4 versicolor   57.49115
+93           5.8         2.6          4.0         1.2 versicolor   47.37522
+94           5.0         2.3          3.3         1.0 versicolor   36.12832
+95           5.6         2.7          4.2         1.3 versicolor   47.50088
+96           5.7         3.0          4.2         1.2 versicolor   53.72123
+97           5.7         2.9          4.2         1.3 versicolor   51.93053
+98           6.2         2.9          4.3         1.3 versicolor   56.48584
+99           5.1         2.5          3.0         1.1 versicolor   40.05531
+100          5.7         2.8          4.1         1.3 versicolor   50.13982
+101          6.3         3.3          6.0         2.5  virginica   65.31371
+102          5.8         2.7          5.1         1.9  virginica   49.19734
+103          7.1         3.0          5.9         2.1  virginica   66.91592
+104          6.3         2.9          5.6         1.8  virginica   57.39690
+105          6.5         3.0          5.8         2.2  virginica   61.26106
+106          7.6         3.0          6.6         2.1  virginica   71.62831
+107          4.9         2.5          4.5         1.7  virginica   38.48451
+108          7.3         2.9          6.3         1.8  virginica   66.50752
+109          6.7         2.5          5.8         1.8  virginica   52.62168
+110          7.2         3.6          6.1         2.5  virginica   81.43008
+111          6.5         3.2          5.1         2.0  virginica   65.34513
+112          6.4         2.7          5.3         1.9  virginica   54.28672
+113          6.8         3.0          5.5         2.1  virginica   64.08849
+114          5.7         2.5          5.0         2.0  virginica   44.76770
+115          5.8         2.8          5.1         2.4  virginica   51.01946
+116          6.4         3.2          5.3         2.3  virginica   64.33982
+117          6.5         3.0          5.5         1.8  virginica   61.26106
+118          7.7         3.8          6.7         2.2  virginica   91.92300
+119          7.7         2.6          6.9         2.3  virginica   62.89468
+120          6.0         2.2          5.0         1.5  virginica   41.46902
+121          6.9         3.2          5.7         2.3  virginica   69.36637
+122          5.6         2.8          4.9         2.0  virginica   49.26017
+123          7.7         2.8          6.7         2.0  virginica   67.73274
+124          6.3         2.7          4.9         1.8  virginica   53.43849
+125          6.7         3.3          5.7         2.1  virginica   69.46061
+126          7.2         3.2          6.0         1.8  virginica   72.38229
+127          6.2         2.8          4.8         1.8  virginica   54.53805
+128          6.1         3.0          4.9         1.8  virginica   57.49115
+129          6.4         2.8          5.6         2.1  virginica   56.29734
+130          7.2         3.0          5.8         1.6  virginica   67.85840
+131          7.4         2.8          6.1         1.9  virginica   65.09380
+132          7.9         3.8          6.4         2.0  virginica   94.31061
+133          6.4         2.8          5.6         2.2  virginica   56.29734
+134          6.3         2.8          5.1         1.5  virginica   55.41769
+135          6.1         2.6          5.6         1.4  virginica   49.82566
+136          7.7         3.0          6.1         2.3  virginica   72.57079
+137          6.3         3.4          5.6         2.4  virginica   67.29291
+138          6.4         3.1          5.5         1.8  virginica   62.32920
+139          6.0         3.0          4.8         1.8  virginica   56.54867
+140          6.9         3.1          5.4         2.1  virginica   67.19867
+141          6.7         3.1          5.6         2.4  virginica   65.25088
+142          6.9         3.1          5.1         2.3  virginica   67.19867
+143          5.8         2.7          5.1         1.9  virginica   49.19734
+144          6.8         3.2          5.9         2.3  virginica   68.36106
+145          6.7         3.3          5.7         2.5  virginica   69.46061
+146          6.7         3.0          5.2         2.3  virginica   63.14601
+147          6.3         2.5          5.0         1.9  virginica   49.48008
+148          6.5         3.0          5.2         2.0  virginica   61.26106
+149          6.2         3.4          5.4         2.3  virginica   66.22477
+150          5.9         3.0          5.1         1.8  virginica   55.60619</code></pre>
+</div>
+</div>
+<p>Você errou a coluna <code>petal.lenght</code> e precisa multiplicar por 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Petal.Length =</span> Petal.Length<span class="sc">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            5.1         3.5          2.8         0.2     setosa
+2            4.9         3.0          2.8         0.2     setosa
+3            4.7         3.2          2.6         0.2     setosa
+4            4.6         3.1          3.0         0.2     setosa
+5            5.0         3.6          2.8         0.2     setosa
+6            5.4         3.9          3.4         0.4     setosa
+7            4.6         3.4          2.8         0.3     setosa
+8            5.0         3.4          3.0         0.2     setosa
+9            4.4         2.9          2.8         0.2     setosa
+10           4.9         3.1          3.0         0.1     setosa
+11           5.4         3.7          3.0         0.2     setosa
+12           4.8         3.4          3.2         0.2     setosa
+13           4.8         3.0          2.8         0.1     setosa
+14           4.3         3.0          2.2         0.1     setosa
+15           5.8         4.0          2.4         0.2     setosa
+16           5.7         4.4          3.0         0.4     setosa
+17           5.4         3.9          2.6         0.4     setosa
+18           5.1         3.5          2.8         0.3     setosa
+19           5.7         3.8          3.4         0.3     setosa
+20           5.1         3.8          3.0         0.3     setosa
+21           5.4         3.4          3.4         0.2     setosa
+22           5.1         3.7          3.0         0.4     setosa
+23           4.6         3.6          2.0         0.2     setosa
+24           5.1         3.3          3.4         0.5     setosa
+25           4.8         3.4          3.8         0.2     setosa
+26           5.0         3.0          3.2         0.2     setosa
+27           5.0         3.4          3.2         0.4     setosa
+28           5.2         3.5          3.0         0.2     setosa
+29           5.2         3.4          2.8         0.2     setosa
+30           4.7         3.2          3.2         0.2     setosa
+31           4.8         3.1          3.2         0.2     setosa
+32           5.4         3.4          3.0         0.4     setosa
+33           5.2         4.1          3.0         0.1     setosa
+34           5.5         4.2          2.8         0.2     setosa
+35           4.9         3.1          3.0         0.2     setosa
+36           5.0         3.2          2.4         0.2     setosa
+37           5.5         3.5          2.6         0.2     setosa
+38           4.9         3.6          2.8         0.1     setosa
+39           4.4         3.0          2.6         0.2     setosa
+40           5.1         3.4          3.0         0.2     setosa
+41           5.0         3.5          2.6         0.3     setosa
+42           4.5         2.3          2.6         0.3     setosa
+43           4.4         3.2          2.6         0.2     setosa
+44           5.0         3.5          3.2         0.6     setosa
+45           5.1         3.8          3.8         0.4     setosa
+46           4.8         3.0          2.8         0.3     setosa
+47           5.1         3.8          3.2         0.2     setosa
+48           4.6         3.2          2.8         0.2     setosa
+49           5.3         3.7          3.0         0.2     setosa
+50           5.0         3.3          2.8         0.2     setosa
+51           7.0         3.2          9.4         1.4 versicolor
+52           6.4         3.2          9.0         1.5 versicolor
+53           6.9         3.1          9.8         1.5 versicolor
+54           5.5         2.3          8.0         1.3 versicolor
+55           6.5         2.8          9.2         1.5 versicolor
+56           5.7         2.8          9.0         1.3 versicolor
+57           6.3         3.3          9.4         1.6 versicolor
+58           4.9         2.4          6.6         1.0 versicolor
+59           6.6         2.9          9.2         1.3 versicolor
+60           5.2         2.7          7.8         1.4 versicolor
+61           5.0         2.0          7.0         1.0 versicolor
+62           5.9         3.0          8.4         1.5 versicolor
+63           6.0         2.2          8.0         1.0 versicolor
+64           6.1         2.9          9.4         1.4 versicolor
+65           5.6         2.9          7.2         1.3 versicolor
+66           6.7         3.1          8.8         1.4 versicolor
+67           5.6         3.0          9.0         1.5 versicolor
+68           5.8         2.7          8.2         1.0 versicolor
+69           6.2         2.2          9.0         1.5 versicolor
+70           5.6         2.5          7.8         1.1 versicolor
+71           5.9         3.2          9.6         1.8 versicolor
+72           6.1         2.8          8.0         1.3 versicolor
+73           6.3         2.5          9.8         1.5 versicolor
+74           6.1         2.8          9.4         1.2 versicolor
+75           6.4         2.9          8.6         1.3 versicolor
+76           6.6         3.0          8.8         1.4 versicolor
+77           6.8         2.8          9.6         1.4 versicolor
+78           6.7         3.0         10.0         1.7 versicolor
+79           6.0         2.9          9.0         1.5 versicolor
+80           5.7         2.6          7.0         1.0 versicolor
+81           5.5         2.4          7.6         1.1 versicolor
+82           5.5         2.4          7.4         1.0 versicolor
+83           5.8         2.7          7.8         1.2 versicolor
+84           6.0         2.7         10.2         1.6 versicolor
+85           5.4         3.0          9.0         1.5 versicolor
+86           6.0         3.4          9.0         1.6 versicolor
+87           6.7         3.1          9.4         1.5 versicolor
+88           6.3         2.3          8.8         1.3 versicolor
+89           5.6         3.0          8.2         1.3 versicolor
+90           5.5         2.5          8.0         1.3 versicolor
+91           5.5         2.6          8.8         1.2 versicolor
+92           6.1         3.0          9.2         1.4 versicolor
+93           5.8         2.6          8.0         1.2 versicolor
+94           5.0         2.3          6.6         1.0 versicolor
+95           5.6         2.7          8.4         1.3 versicolor
+96           5.7         3.0          8.4         1.2 versicolor
+97           5.7         2.9          8.4         1.3 versicolor
+98           6.2         2.9          8.6         1.3 versicolor
+99           5.1         2.5          6.0         1.1 versicolor
+100          5.7         2.8          8.2         1.3 versicolor
+101          6.3         3.3         12.0         2.5  virginica
+102          5.8         2.7         10.2         1.9  virginica
+103          7.1         3.0         11.8         2.1  virginica
+104          6.3         2.9         11.2         1.8  virginica
+105          6.5         3.0         11.6         2.2  virginica
+106          7.6         3.0         13.2         2.1  virginica
+107          4.9         2.5          9.0         1.7  virginica
+108          7.3         2.9         12.6         1.8  virginica
+109          6.7         2.5         11.6         1.8  virginica
+110          7.2         3.6         12.2         2.5  virginica
+111          6.5         3.2         10.2         2.0  virginica
+112          6.4         2.7         10.6         1.9  virginica
+113          6.8         3.0         11.0         2.1  virginica
+114          5.7         2.5         10.0         2.0  virginica
+115          5.8         2.8         10.2         2.4  virginica
+116          6.4         3.2         10.6         2.3  virginica
+117          6.5         3.0         11.0         1.8  virginica
+118          7.7         3.8         13.4         2.2  virginica
+119          7.7         2.6         13.8         2.3  virginica
+120          6.0         2.2         10.0         1.5  virginica
+121          6.9         3.2         11.4         2.3  virginica
+122          5.6         2.8          9.8         2.0  virginica
+123          7.7         2.8         13.4         2.0  virginica
+124          6.3         2.7          9.8         1.8  virginica
+125          6.7         3.3         11.4         2.1  virginica
+126          7.2         3.2         12.0         1.8  virginica
+127          6.2         2.8          9.6         1.8  virginica
+128          6.1         3.0          9.8         1.8  virginica
+129          6.4         2.8         11.2         2.1  virginica
+130          7.2         3.0         11.6         1.6  virginica
+131          7.4         2.8         12.2         1.9  virginica
+132          7.9         3.8         12.8         2.0  virginica
+133          6.4         2.8         11.2         2.2  virginica
+134          6.3         2.8         10.2         1.5  virginica
+135          6.1         2.6         11.2         1.4  virginica
+136          7.7         3.0         12.2         2.3  virginica
+137          6.3         3.4         11.2         2.4  virginica
+138          6.4         3.1         11.0         1.8  virginica
+139          6.0         3.0          9.6         1.8  virginica
+140          6.9         3.1         10.8         2.1  virginica
+141          6.7         3.1         11.2         2.4  virginica
+142          6.9         3.1         10.2         2.3  virginica
+143          5.8         2.7         10.2         1.9  virginica
+144          6.8         3.2         11.8         2.3  virginica
+145          6.7         3.3         11.4         2.5  virginica
+146          6.7         3.0         10.4         2.3  virginica
+147          6.3         2.5         10.0         1.9  virginica
+148          6.5         3.0         10.4         2.0  virginica
+149          6.2         3.4         10.8         2.3  virginica
+150          5.9         3.0         10.2         1.8  virginica</code></pre>
+</div>
+</div>
+<p>Usando informações externas</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">reino =</span> <span class="st">"planta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species  reino
+1            5.1         3.5          1.4         0.2     setosa planta
+2            4.9         3.0          1.4         0.2     setosa planta
+3            4.7         3.2          1.3         0.2     setosa planta
+4            4.6         3.1          1.5         0.2     setosa planta
+5            5.0         3.6          1.4         0.2     setosa planta
+6            5.4         3.9          1.7         0.4     setosa planta
+7            4.6         3.4          1.4         0.3     setosa planta
+8            5.0         3.4          1.5         0.2     setosa planta
+9            4.4         2.9          1.4         0.2     setosa planta
+10           4.9         3.1          1.5         0.1     setosa planta
+11           5.4         3.7          1.5         0.2     setosa planta
+12           4.8         3.4          1.6         0.2     setosa planta
+13           4.8         3.0          1.4         0.1     setosa planta
+14           4.3         3.0          1.1         0.1     setosa planta
+15           5.8         4.0          1.2         0.2     setosa planta
+16           5.7         4.4          1.5         0.4     setosa planta
+17           5.4         3.9          1.3         0.4     setosa planta
+18           5.1         3.5          1.4         0.3     setosa planta
+19           5.7         3.8          1.7         0.3     setosa planta
+20           5.1         3.8          1.5         0.3     setosa planta
+21           5.4         3.4          1.7         0.2     setosa planta
+22           5.1         3.7          1.5         0.4     setosa planta
+23           4.6         3.6          1.0         0.2     setosa planta
+24           5.1         3.3          1.7         0.5     setosa planta
+25           4.8         3.4          1.9         0.2     setosa planta
+26           5.0         3.0          1.6         0.2     setosa planta
+27           5.0         3.4          1.6         0.4     setosa planta
+28           5.2         3.5          1.5         0.2     setosa planta
+29           5.2         3.4          1.4         0.2     setosa planta
+30           4.7         3.2          1.6         0.2     setosa planta
+31           4.8         3.1          1.6         0.2     setosa planta
+32           5.4         3.4          1.5         0.4     setosa planta
+33           5.2         4.1          1.5         0.1     setosa planta
+34           5.5         4.2          1.4         0.2     setosa planta
+35           4.9         3.1          1.5         0.2     setosa planta
+36           5.0         3.2          1.2         0.2     setosa planta
+37           5.5         3.5          1.3         0.2     setosa planta
+38           4.9         3.6          1.4         0.1     setosa planta
+39           4.4         3.0          1.3         0.2     setosa planta
+40           5.1         3.4          1.5         0.2     setosa planta
+41           5.0         3.5          1.3         0.3     setosa planta
+42           4.5         2.3          1.3         0.3     setosa planta
+43           4.4         3.2          1.3         0.2     setosa planta
+44           5.0         3.5          1.6         0.6     setosa planta
+45           5.1         3.8          1.9         0.4     setosa planta
+46           4.8         3.0          1.4         0.3     setosa planta
+47           5.1         3.8          1.6         0.2     setosa planta
+48           4.6         3.2          1.4         0.2     setosa planta
+49           5.3         3.7          1.5         0.2     setosa planta
+50           5.0         3.3          1.4         0.2     setosa planta
+51           7.0         3.2          4.7         1.4 versicolor planta
+52           6.4         3.2          4.5         1.5 versicolor planta
+53           6.9         3.1          4.9         1.5 versicolor planta
+54           5.5         2.3          4.0         1.3 versicolor planta
+55           6.5         2.8          4.6         1.5 versicolor planta
+56           5.7         2.8          4.5         1.3 versicolor planta
+57           6.3         3.3          4.7         1.6 versicolor planta
+58           4.9         2.4          3.3         1.0 versicolor planta
+59           6.6         2.9          4.6         1.3 versicolor planta
+60           5.2         2.7          3.9         1.4 versicolor planta
+61           5.0         2.0          3.5         1.0 versicolor planta
+62           5.9         3.0          4.2         1.5 versicolor planta
+63           6.0         2.2          4.0         1.0 versicolor planta
+64           6.1         2.9          4.7         1.4 versicolor planta
+65           5.6         2.9          3.6         1.3 versicolor planta
+66           6.7         3.1          4.4         1.4 versicolor planta
+67           5.6         3.0          4.5         1.5 versicolor planta
+68           5.8         2.7          4.1         1.0 versicolor planta
+69           6.2         2.2          4.5         1.5 versicolor planta
+70           5.6         2.5          3.9         1.1 versicolor planta
+71           5.9         3.2          4.8         1.8 versicolor planta
+72           6.1         2.8          4.0         1.3 versicolor planta
+73           6.3         2.5          4.9         1.5 versicolor planta
+74           6.1         2.8          4.7         1.2 versicolor planta
+75           6.4         2.9          4.3         1.3 versicolor planta
+76           6.6         3.0          4.4         1.4 versicolor planta
+77           6.8         2.8          4.8         1.4 versicolor planta
+78           6.7         3.0          5.0         1.7 versicolor planta
+79           6.0         2.9          4.5         1.5 versicolor planta
+80           5.7         2.6          3.5         1.0 versicolor planta
+81           5.5         2.4          3.8         1.1 versicolor planta
+82           5.5         2.4          3.7         1.0 versicolor planta
+83           5.8         2.7          3.9         1.2 versicolor planta
+84           6.0         2.7          5.1         1.6 versicolor planta
+85           5.4         3.0          4.5         1.5 versicolor planta
+86           6.0         3.4          4.5         1.6 versicolor planta
+87           6.7         3.1          4.7         1.5 versicolor planta
+88           6.3         2.3          4.4         1.3 versicolor planta
+89           5.6         3.0          4.1         1.3 versicolor planta
+90           5.5         2.5          4.0         1.3 versicolor planta
+91           5.5         2.6          4.4         1.2 versicolor planta
+92           6.1         3.0          4.6         1.4 versicolor planta
+93           5.8         2.6          4.0         1.2 versicolor planta
+94           5.0         2.3          3.3         1.0 versicolor planta
+95           5.6         2.7          4.2         1.3 versicolor planta
+96           5.7         3.0          4.2         1.2 versicolor planta
+97           5.7         2.9          4.2         1.3 versicolor planta
+98           6.2         2.9          4.3         1.3 versicolor planta
+99           5.1         2.5          3.0         1.1 versicolor planta
+100          5.7         2.8          4.1         1.3 versicolor planta
+101          6.3         3.3          6.0         2.5  virginica planta
+102          5.8         2.7          5.1         1.9  virginica planta
+103          7.1         3.0          5.9         2.1  virginica planta
+104          6.3         2.9          5.6         1.8  virginica planta
+105          6.5         3.0          5.8         2.2  virginica planta
+106          7.6         3.0          6.6         2.1  virginica planta
+107          4.9         2.5          4.5         1.7  virginica planta
+108          7.3         2.9          6.3         1.8  virginica planta
+109          6.7         2.5          5.8         1.8  virginica planta
+110          7.2         3.6          6.1         2.5  virginica planta
+111          6.5         3.2          5.1         2.0  virginica planta
+112          6.4         2.7          5.3         1.9  virginica planta
+113          6.8         3.0          5.5         2.1  virginica planta
+114          5.7         2.5          5.0         2.0  virginica planta
+115          5.8         2.8          5.1         2.4  virginica planta
+116          6.4         3.2          5.3         2.3  virginica planta
+117          6.5         3.0          5.5         1.8  virginica planta
+118          7.7         3.8          6.7         2.2  virginica planta
+119          7.7         2.6          6.9         2.3  virginica planta
+120          6.0         2.2          5.0         1.5  virginica planta
+121          6.9         3.2          5.7         2.3  virginica planta
+122          5.6         2.8          4.9         2.0  virginica planta
+123          7.7         2.8          6.7         2.0  virginica planta
+124          6.3         2.7          4.9         1.8  virginica planta
+125          6.7         3.3          5.7         2.1  virginica planta
+126          7.2         3.2          6.0         1.8  virginica planta
+127          6.2         2.8          4.8         1.8  virginica planta
+128          6.1         3.0          4.9         1.8  virginica planta
+129          6.4         2.8          5.6         2.1  virginica planta
+130          7.2         3.0          5.8         1.6  virginica planta
+131          7.4         2.8          6.1         1.9  virginica planta
+132          7.9         3.8          6.4         2.0  virginica planta
+133          6.4         2.8          5.6         2.2  virginica planta
+134          6.3         2.8          5.1         1.5  virginica planta
+135          6.1         2.6          5.6         1.4  virginica planta
+136          7.7         3.0          6.1         2.3  virginica planta
+137          6.3         3.4          5.6         2.4  virginica planta
+138          6.4         3.1          5.5         1.8  virginica planta
+139          6.0         3.0          4.8         1.8  virginica planta
+140          6.9         3.1          5.4         2.1  virginica planta
+141          6.7         3.1          5.6         2.4  virginica planta
+142          6.9         3.1          5.1         2.3  virginica planta
+143          5.8         2.7          5.1         1.9  virginica planta
+144          6.8         3.2          5.9         2.3  virginica planta
+145          6.7         3.3          5.7         2.5  virginica planta
+146          6.7         3.0          5.2         2.3  virginica planta
+147          6.3         2.5          5.0         1.9  virginica planta
+148          6.5         3.0          5.2         2.0  virginica planta
+149          6.2         3.4          5.4         2.3  virginica planta
+150          5.9         3.0          5.1         1.8  virginica planta</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">reino =</span> <span class="fu">c</span>(<span class="st">"planta"</span>,<span class="st">"fungo"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">reino =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species reino
+1            5.1         3.5          1.4         0.2     setosa     1
+2            4.9         3.0          1.4         0.2     setosa     2
+3            4.7         3.2          1.3         0.2     setosa     3
+4            4.6         3.1          1.5         0.2     setosa     4
+5            5.0         3.6          1.4         0.2     setosa     5
+6            5.4         3.9          1.7         0.4     setosa     6
+7            4.6         3.4          1.4         0.3     setosa     7
+8            5.0         3.4          1.5         0.2     setosa     8
+9            4.4         2.9          1.4         0.2     setosa     9
+10           4.9         3.1          1.5         0.1     setosa    10
+11           5.4         3.7          1.5         0.2     setosa    11
+12           4.8         3.4          1.6         0.2     setosa    12
+13           4.8         3.0          1.4         0.1     setosa    13
+14           4.3         3.0          1.1         0.1     setosa    14
+15           5.8         4.0          1.2         0.2     setosa    15
+16           5.7         4.4          1.5         0.4     setosa    16
+17           5.4         3.9          1.3         0.4     setosa    17
+18           5.1         3.5          1.4         0.3     setosa    18
+19           5.7         3.8          1.7         0.3     setosa    19
+20           5.1         3.8          1.5         0.3     setosa    20
+21           5.4         3.4          1.7         0.2     setosa    21
+22           5.1         3.7          1.5         0.4     setosa    22
+23           4.6         3.6          1.0         0.2     setosa    23
+24           5.1         3.3          1.7         0.5     setosa    24
+25           4.8         3.4          1.9         0.2     setosa    25
+26           5.0         3.0          1.6         0.2     setosa    26
+27           5.0         3.4          1.6         0.4     setosa    27
+28           5.2         3.5          1.5         0.2     setosa    28
+29           5.2         3.4          1.4         0.2     setosa    29
+30           4.7         3.2          1.6         0.2     setosa    30
+31           4.8         3.1          1.6         0.2     setosa    31
+32           5.4         3.4          1.5         0.4     setosa    32
+33           5.2         4.1          1.5         0.1     setosa    33
+34           5.5         4.2          1.4         0.2     setosa    34
+35           4.9         3.1          1.5         0.2     setosa    35
+36           5.0         3.2          1.2         0.2     setosa    36
+37           5.5         3.5          1.3         0.2     setosa    37
+38           4.9         3.6          1.4         0.1     setosa    38
+39           4.4         3.0          1.3         0.2     setosa    39
+40           5.1         3.4          1.5         0.2     setosa    40
+41           5.0         3.5          1.3         0.3     setosa    41
+42           4.5         2.3          1.3         0.3     setosa    42
+43           4.4         3.2          1.3         0.2     setosa    43
+44           5.0         3.5          1.6         0.6     setosa    44
+45           5.1         3.8          1.9         0.4     setosa    45
+46           4.8         3.0          1.4         0.3     setosa    46
+47           5.1         3.8          1.6         0.2     setosa    47
+48           4.6         3.2          1.4         0.2     setosa    48
+49           5.3         3.7          1.5         0.2     setosa    49
+50           5.0         3.3          1.4         0.2     setosa    50
+51           7.0         3.2          4.7         1.4 versicolor    51
+52           6.4         3.2          4.5         1.5 versicolor    52
+53           6.9         3.1          4.9         1.5 versicolor    53
+54           5.5         2.3          4.0         1.3 versicolor    54
+55           6.5         2.8          4.6         1.5 versicolor    55
+56           5.7         2.8          4.5         1.3 versicolor    56
+57           6.3         3.3          4.7         1.6 versicolor    57
+58           4.9         2.4          3.3         1.0 versicolor    58
+59           6.6         2.9          4.6         1.3 versicolor    59
+60           5.2         2.7          3.9         1.4 versicolor    60
+61           5.0         2.0          3.5         1.0 versicolor    61
+62           5.9         3.0          4.2         1.5 versicolor    62
+63           6.0         2.2          4.0         1.0 versicolor    63
+64           6.1         2.9          4.7         1.4 versicolor    64
+65           5.6         2.9          3.6         1.3 versicolor    65
+66           6.7         3.1          4.4         1.4 versicolor    66
+67           5.6         3.0          4.5         1.5 versicolor    67
+68           5.8         2.7          4.1         1.0 versicolor    68
+69           6.2         2.2          4.5         1.5 versicolor    69
+70           5.6         2.5          3.9         1.1 versicolor    70
+71           5.9         3.2          4.8         1.8 versicolor    71
+72           6.1         2.8          4.0         1.3 versicolor    72
+73           6.3         2.5          4.9         1.5 versicolor    73
+74           6.1         2.8          4.7         1.2 versicolor    74
+75           6.4         2.9          4.3         1.3 versicolor    75
+76           6.6         3.0          4.4         1.4 versicolor    76
+77           6.8         2.8          4.8         1.4 versicolor    77
+78           6.7         3.0          5.0         1.7 versicolor    78
+79           6.0         2.9          4.5         1.5 versicolor    79
+80           5.7         2.6          3.5         1.0 versicolor    80
+81           5.5         2.4          3.8         1.1 versicolor    81
+82           5.5         2.4          3.7         1.0 versicolor    82
+83           5.8         2.7          3.9         1.2 versicolor    83
+84           6.0         2.7          5.1         1.6 versicolor    84
+85           5.4         3.0          4.5         1.5 versicolor    85
+86           6.0         3.4          4.5         1.6 versicolor    86
+87           6.7         3.1          4.7         1.5 versicolor    87
+88           6.3         2.3          4.4         1.3 versicolor    88
+89           5.6         3.0          4.1         1.3 versicolor    89
+90           5.5         2.5          4.0         1.3 versicolor    90
+91           5.5         2.6          4.4         1.2 versicolor    91
+92           6.1         3.0          4.6         1.4 versicolor    92
+93           5.8         2.6          4.0         1.2 versicolor    93
+94           5.0         2.3          3.3         1.0 versicolor    94
+95           5.6         2.7          4.2         1.3 versicolor    95
+96           5.7         3.0          4.2         1.2 versicolor    96
+97           5.7         2.9          4.2         1.3 versicolor    97
+98           6.2         2.9          4.3         1.3 versicolor    98
+99           5.1         2.5          3.0         1.1 versicolor    99
+100          5.7         2.8          4.1         1.3 versicolor   100
+101          6.3         3.3          6.0         2.5  virginica   101
+102          5.8         2.7          5.1         1.9  virginica   102
+103          7.1         3.0          5.9         2.1  virginica   103
+104          6.3         2.9          5.6         1.8  virginica   104
+105          6.5         3.0          5.8         2.2  virginica   105
+106          7.6         3.0          6.6         2.1  virginica   106
+107          4.9         2.5          4.5         1.7  virginica   107
+108          7.3         2.9          6.3         1.8  virginica   108
+109          6.7         2.5          5.8         1.8  virginica   109
+110          7.2         3.6          6.1         2.5  virginica   110
+111          6.5         3.2          5.1         2.0  virginica   111
+112          6.4         2.7          5.3         1.9  virginica   112
+113          6.8         3.0          5.5         2.1  virginica   113
+114          5.7         2.5          5.0         2.0  virginica   114
+115          5.8         2.8          5.1         2.4  virginica   115
+116          6.4         3.2          5.3         2.3  virginica   116
+117          6.5         3.0          5.5         1.8  virginica   117
+118          7.7         3.8          6.7         2.2  virginica   118
+119          7.7         2.6          6.9         2.3  virginica   119
+120          6.0         2.2          5.0         1.5  virginica   120
+121          6.9         3.2          5.7         2.3  virginica   121
+122          5.6         2.8          4.9         2.0  virginica   122
+123          7.7         2.8          6.7         2.0  virginica   123
+124          6.3         2.7          4.9         1.8  virginica   124
+125          6.7         3.3          5.7         2.1  virginica   125
+126          7.2         3.2          6.0         1.8  virginica   126
+127          6.2         2.8          4.8         1.8  virginica   127
+128          6.1         3.0          4.9         1.8  virginica   128
+129          6.4         2.8          5.6         2.1  virginica   129
+130          7.2         3.0          5.8         1.6  virginica   130
+131          7.4         2.8          6.1         1.9  virginica   131
+132          7.9         3.8          6.4         2.0  virginica   132
+133          6.4         2.8          5.6         2.2  virginica   133
+134          6.3         2.8          5.1         1.5  virginica   134
+135          6.1         2.6          5.6         1.4  virginica   135
+136          7.7         3.0          6.1         2.3  virginica   136
+137          6.3         3.4          5.6         2.4  virginica   137
+138          6.4         3.1          5.5         1.8  virginica   138
+139          6.0         3.0          4.8         1.8  virginica   139
+140          6.9         3.1          5.4         2.1  virginica   140
+141          6.7         3.1          5.6         2.4  virginica   141
+142          6.9         3.1          5.1         2.3  virginica   142
+143          5.8         2.7          5.1         1.9  virginica   143
+144          6.8         3.2          5.9         2.3  virginica   144
+145          6.7         3.3          5.7         2.5  virginica   145
+146          6.7         3.0          5.2         2.3  virginica   146
+147          6.3         2.5          5.0         1.9  virginica   147
+148          6.5         3.0          5.2         2.0  virginica   148
+149          6.2         3.4          5.4         2.3  virginica   149
+150          5.9         3.0          5.1         1.8  virginica   150</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">reino =</span> <span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],<span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species reino
+1            5.1         3.5          1.4         0.2     setosa     A
+2            4.9         3.0          1.4         0.2     setosa     B
+3            4.7         3.2          1.3         0.2     setosa     C
+4            4.6         3.1          1.5         0.2     setosa     D
+5            5.0         3.6          1.4         0.2     setosa     E
+6            5.4         3.9          1.7         0.4     setosa     A
+7            4.6         3.4          1.4         0.3     setosa     B
+8            5.0         3.4          1.5         0.2     setosa     C
+9            4.4         2.9          1.4         0.2     setosa     D
+10           4.9         3.1          1.5         0.1     setosa     E
+11           5.4         3.7          1.5         0.2     setosa     A
+12           4.8         3.4          1.6         0.2     setosa     B
+13           4.8         3.0          1.4         0.1     setosa     C
+14           4.3         3.0          1.1         0.1     setosa     D
+15           5.8         4.0          1.2         0.2     setosa     E
+16           5.7         4.4          1.5         0.4     setosa     A
+17           5.4         3.9          1.3         0.4     setosa     B
+18           5.1         3.5          1.4         0.3     setosa     C
+19           5.7         3.8          1.7         0.3     setosa     D
+20           5.1         3.8          1.5         0.3     setosa     E
+21           5.4         3.4          1.7         0.2     setosa     A
+22           5.1         3.7          1.5         0.4     setosa     B
+23           4.6         3.6          1.0         0.2     setosa     C
+24           5.1         3.3          1.7         0.5     setosa     D
+25           4.8         3.4          1.9         0.2     setosa     E
+26           5.0         3.0          1.6         0.2     setosa     A
+27           5.0         3.4          1.6         0.4     setosa     B
+28           5.2         3.5          1.5         0.2     setosa     C
+29           5.2         3.4          1.4         0.2     setosa     D
+30           4.7         3.2          1.6         0.2     setosa     E
+31           4.8         3.1          1.6         0.2     setosa     A
+32           5.4         3.4          1.5         0.4     setosa     B
+33           5.2         4.1          1.5         0.1     setosa     C
+34           5.5         4.2          1.4         0.2     setosa     D
+35           4.9         3.1          1.5         0.2     setosa     E
+36           5.0         3.2          1.2         0.2     setosa     A
+37           5.5         3.5          1.3         0.2     setosa     B
+38           4.9         3.6          1.4         0.1     setosa     C
+39           4.4         3.0          1.3         0.2     setosa     D
+40           5.1         3.4          1.5         0.2     setosa     E
+41           5.0         3.5          1.3         0.3     setosa     A
+42           4.5         2.3          1.3         0.3     setosa     B
+43           4.4         3.2          1.3         0.2     setosa     C
+44           5.0         3.5          1.6         0.6     setosa     D
+45           5.1         3.8          1.9         0.4     setosa     E
+46           4.8         3.0          1.4         0.3     setosa     A
+47           5.1         3.8          1.6         0.2     setosa     B
+48           4.6         3.2          1.4         0.2     setosa     C
+49           5.3         3.7          1.5         0.2     setosa     D
+50           5.0         3.3          1.4         0.2     setosa     E
+51           7.0         3.2          4.7         1.4 versicolor     A
+52           6.4         3.2          4.5         1.5 versicolor     B
+53           6.9         3.1          4.9         1.5 versicolor     C
+54           5.5         2.3          4.0         1.3 versicolor     D
+55           6.5         2.8          4.6         1.5 versicolor     E
+56           5.7         2.8          4.5         1.3 versicolor     A
+57           6.3         3.3          4.7         1.6 versicolor     B
+58           4.9         2.4          3.3         1.0 versicolor     C
+59           6.6         2.9          4.6         1.3 versicolor     D
+60           5.2         2.7          3.9         1.4 versicolor     E
+61           5.0         2.0          3.5         1.0 versicolor     A
+62           5.9         3.0          4.2         1.5 versicolor     B
+63           6.0         2.2          4.0         1.0 versicolor     C
+64           6.1         2.9          4.7         1.4 versicolor     D
+65           5.6         2.9          3.6         1.3 versicolor     E
+66           6.7         3.1          4.4         1.4 versicolor     A
+67           5.6         3.0          4.5         1.5 versicolor     B
+68           5.8         2.7          4.1         1.0 versicolor     C
+69           6.2         2.2          4.5         1.5 versicolor     D
+70           5.6         2.5          3.9         1.1 versicolor     E
+71           5.9         3.2          4.8         1.8 versicolor     A
+72           6.1         2.8          4.0         1.3 versicolor     B
+73           6.3         2.5          4.9         1.5 versicolor     C
+74           6.1         2.8          4.7         1.2 versicolor     D
+75           6.4         2.9          4.3         1.3 versicolor     E
+76           6.6         3.0          4.4         1.4 versicolor     A
+77           6.8         2.8          4.8         1.4 versicolor     B
+78           6.7         3.0          5.0         1.7 versicolor     C
+79           6.0         2.9          4.5         1.5 versicolor     D
+80           5.7         2.6          3.5         1.0 versicolor     E
+81           5.5         2.4          3.8         1.1 versicolor     A
+82           5.5         2.4          3.7         1.0 versicolor     B
+83           5.8         2.7          3.9         1.2 versicolor     C
+84           6.0         2.7          5.1         1.6 versicolor     D
+85           5.4         3.0          4.5         1.5 versicolor     E
+86           6.0         3.4          4.5         1.6 versicolor     A
+87           6.7         3.1          4.7         1.5 versicolor     B
+88           6.3         2.3          4.4         1.3 versicolor     C
+89           5.6         3.0          4.1         1.3 versicolor     D
+90           5.5         2.5          4.0         1.3 versicolor     E
+91           5.5         2.6          4.4         1.2 versicolor     A
+92           6.1         3.0          4.6         1.4 versicolor     B
+93           5.8         2.6          4.0         1.2 versicolor     C
+94           5.0         2.3          3.3         1.0 versicolor     D
+95           5.6         2.7          4.2         1.3 versicolor     E
+96           5.7         3.0          4.2         1.2 versicolor     A
+97           5.7         2.9          4.2         1.3 versicolor     B
+98           6.2         2.9          4.3         1.3 versicolor     C
+99           5.1         2.5          3.0         1.1 versicolor     D
+100          5.7         2.8          4.1         1.3 versicolor     E
+101          6.3         3.3          6.0         2.5  virginica     A
+102          5.8         2.7          5.1         1.9  virginica     B
+103          7.1         3.0          5.9         2.1  virginica     C
+104          6.3         2.9          5.6         1.8  virginica     D
+105          6.5         3.0          5.8         2.2  virginica     E
+106          7.6         3.0          6.6         2.1  virginica     A
+107          4.9         2.5          4.5         1.7  virginica     B
+108          7.3         2.9          6.3         1.8  virginica     C
+109          6.7         2.5          5.8         1.8  virginica     D
+110          7.2         3.6          6.1         2.5  virginica     E
+111          6.5         3.2          5.1         2.0  virginica     A
+112          6.4         2.7          5.3         1.9  virginica     B
+113          6.8         3.0          5.5         2.1  virginica     C
+114          5.7         2.5          5.0         2.0  virginica     D
+115          5.8         2.8          5.1         2.4  virginica     E
+116          6.4         3.2          5.3         2.3  virginica     A
+117          6.5         3.0          5.5         1.8  virginica     B
+118          7.7         3.8          6.7         2.2  virginica     C
+119          7.7         2.6          6.9         2.3  virginica     D
+120          6.0         2.2          5.0         1.5  virginica     E
+121          6.9         3.2          5.7         2.3  virginica     A
+122          5.6         2.8          4.9         2.0  virginica     B
+123          7.7         2.8          6.7         2.0  virginica     C
+124          6.3         2.7          4.9         1.8  virginica     D
+125          6.7         3.3          5.7         2.1  virginica     E
+126          7.2         3.2          6.0         1.8  virginica     A
+127          6.2         2.8          4.8         1.8  virginica     B
+128          6.1         3.0          4.9         1.8  virginica     C
+129          6.4         2.8          5.6         2.1  virginica     D
+130          7.2         3.0          5.8         1.6  virginica     E
+131          7.4         2.8          6.1         1.9  virginica     A
+132          7.9         3.8          6.4         2.0  virginica     B
+133          6.4         2.8          5.6         2.2  virginica     C
+134          6.3         2.8          5.1         1.5  virginica     D
+135          6.1         2.6          5.6         1.4  virginica     E
+136          7.7         3.0          6.1         2.3  virginica     A
+137          6.3         3.4          5.6         2.4  virginica     B
+138          6.4         3.1          5.5         1.8  virginica     C
+139          6.0         3.0          4.8         1.8  virginica     D
+140          6.9         3.1          5.4         2.1  virginica     E
+141          6.7         3.1          5.6         2.4  virginica     A
+142          6.9         3.1          5.1         2.3  virginica     B
+143          5.8         2.7          5.1         1.9  virginica     C
+144          6.8         3.2          5.9         2.3  virginica     D
+145          6.7         3.3          5.7         2.5  virginica     E
+146          6.7         3.0          5.2         2.3  virginica     A
+147          6.3         2.5          5.0         1.9  virginica     B
+148          6.5         3.0          5.2         2.0  virginica     C
+149          6.2         3.4          5.4         2.3  virginica     D
+150          5.9         3.0          5.1         1.8  virginica     E</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Code =</span> <span class="fu">paste</span>(<span class="st">"spc"</span>,Species,Petal.Length,Petal.Width,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">sep =</span> <span class="st">'_'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            5.1         3.5          1.4         0.2     setosa
+2            4.9         3.0          1.4         0.2     setosa
+3            4.7         3.2          1.3         0.2     setosa
+4            4.6         3.1          1.5         0.2     setosa
+5            5.0         3.6          1.4         0.2     setosa
+6            5.4         3.9          1.7         0.4     setosa
+7            4.6         3.4          1.4         0.3     setosa
+8            5.0         3.4          1.5         0.2     setosa
+9            4.4         2.9          1.4         0.2     setosa
+10           4.9         3.1          1.5         0.1     setosa
+11           5.4         3.7          1.5         0.2     setosa
+12           4.8         3.4          1.6         0.2     setosa
+13           4.8         3.0          1.4         0.1     setosa
+14           4.3         3.0          1.1         0.1     setosa
+15           5.8         4.0          1.2         0.2     setosa
+16           5.7         4.4          1.5         0.4     setosa
+17           5.4         3.9          1.3         0.4     setosa
+18           5.1         3.5          1.4         0.3     setosa
+19           5.7         3.8          1.7         0.3     setosa
+20           5.1         3.8          1.5         0.3     setosa
+21           5.4         3.4          1.7         0.2     setosa
+22           5.1         3.7          1.5         0.4     setosa
+23           4.6         3.6          1.0         0.2     setosa
+24           5.1         3.3          1.7         0.5     setosa
+25           4.8         3.4          1.9         0.2     setosa
+26           5.0         3.0          1.6         0.2     setosa
+27           5.0         3.4          1.6         0.4     setosa
+28           5.2         3.5          1.5         0.2     setosa
+29           5.2         3.4          1.4         0.2     setosa
+30           4.7         3.2          1.6         0.2     setosa
+31           4.8         3.1          1.6         0.2     setosa
+32           5.4         3.4          1.5         0.4     setosa
+33           5.2         4.1          1.5         0.1     setosa
+34           5.5         4.2          1.4         0.2     setosa
+35           4.9         3.1          1.5         0.2     setosa
+36           5.0         3.2          1.2         0.2     setosa
+37           5.5         3.5          1.3         0.2     setosa
+38           4.9         3.6          1.4         0.1     setosa
+39           4.4         3.0          1.3         0.2     setosa
+40           5.1         3.4          1.5         0.2     setosa
+41           5.0         3.5          1.3         0.3     setosa
+42           4.5         2.3          1.3         0.3     setosa
+43           4.4         3.2          1.3         0.2     setosa
+44           5.0         3.5          1.6         0.6     setosa
+45           5.1         3.8          1.9         0.4     setosa
+46           4.8         3.0          1.4         0.3     setosa
+47           5.1         3.8          1.6         0.2     setosa
+48           4.6         3.2          1.4         0.2     setosa
+49           5.3         3.7          1.5         0.2     setosa
+50           5.0         3.3          1.4         0.2     setosa
+51           7.0         3.2          4.7         1.4 versicolor
+52           6.4         3.2          4.5         1.5 versicolor
+53           6.9         3.1          4.9         1.5 versicolor
+54           5.5         2.3          4.0         1.3 versicolor
+55           6.5         2.8          4.6         1.5 versicolor
+56           5.7         2.8          4.5         1.3 versicolor
+57           6.3         3.3          4.7         1.6 versicolor
+58           4.9         2.4          3.3         1.0 versicolor
+59           6.6         2.9          4.6         1.3 versicolor
+60           5.2         2.7          3.9         1.4 versicolor
+61           5.0         2.0          3.5         1.0 versicolor
+62           5.9         3.0          4.2         1.5 versicolor
+63           6.0         2.2          4.0         1.0 versicolor
+64           6.1         2.9          4.7         1.4 versicolor
+65           5.6         2.9          3.6         1.3 versicolor
+66           6.7         3.1          4.4         1.4 versicolor
+67           5.6         3.0          4.5         1.5 versicolor
+68           5.8         2.7          4.1         1.0 versicolor
+69           6.2         2.2          4.5         1.5 versicolor
+70           5.6         2.5          3.9         1.1 versicolor
+71           5.9         3.2          4.8         1.8 versicolor
+72           6.1         2.8          4.0         1.3 versicolor
+73           6.3         2.5          4.9         1.5 versicolor
+74           6.1         2.8          4.7         1.2 versicolor
+75           6.4         2.9          4.3         1.3 versicolor
+76           6.6         3.0          4.4         1.4 versicolor
+77           6.8         2.8          4.8         1.4 versicolor
+78           6.7         3.0          5.0         1.7 versicolor
+79           6.0         2.9          4.5         1.5 versicolor
+80           5.7         2.6          3.5         1.0 versicolor
+81           5.5         2.4          3.8         1.1 versicolor
+82           5.5         2.4          3.7         1.0 versicolor
+83           5.8         2.7          3.9         1.2 versicolor
+84           6.0         2.7          5.1         1.6 versicolor
+85           5.4         3.0          4.5         1.5 versicolor
+86           6.0         3.4          4.5         1.6 versicolor
+87           6.7         3.1          4.7         1.5 versicolor
+88           6.3         2.3          4.4         1.3 versicolor
+89           5.6         3.0          4.1         1.3 versicolor
+90           5.5         2.5          4.0         1.3 versicolor
+91           5.5         2.6          4.4         1.2 versicolor
+92           6.1         3.0          4.6         1.4 versicolor
+93           5.8         2.6          4.0         1.2 versicolor
+94           5.0         2.3          3.3         1.0 versicolor
+95           5.6         2.7          4.2         1.3 versicolor
+96           5.7         3.0          4.2         1.2 versicolor
+97           5.7         2.9          4.2         1.3 versicolor
+98           6.2         2.9          4.3         1.3 versicolor
+99           5.1         2.5          3.0         1.1 versicolor
+100          5.7         2.8          4.1         1.3 versicolor
+101          6.3         3.3          6.0         2.5  virginica
+102          5.8         2.7          5.1         1.9  virginica
+103          7.1         3.0          5.9         2.1  virginica
+104          6.3         2.9          5.6         1.8  virginica
+105          6.5         3.0          5.8         2.2  virginica
+106          7.6         3.0          6.6         2.1  virginica
+107          4.9         2.5          4.5         1.7  virginica
+108          7.3         2.9          6.3         1.8  virginica
+109          6.7         2.5          5.8         1.8  virginica
+110          7.2         3.6          6.1         2.5  virginica
+111          6.5         3.2          5.1         2.0  virginica
+112          6.4         2.7          5.3         1.9  virginica
+113          6.8         3.0          5.5         2.1  virginica
+114          5.7         2.5          5.0         2.0  virginica
+115          5.8         2.8          5.1         2.4  virginica
+116          6.4         3.2          5.3         2.3  virginica
+117          6.5         3.0          5.5         1.8  virginica
+118          7.7         3.8          6.7         2.2  virginica
+119          7.7         2.6          6.9         2.3  virginica
+120          6.0         2.2          5.0         1.5  virginica
+121          6.9         3.2          5.7         2.3  virginica
+122          5.6         2.8          4.9         2.0  virginica
+123          7.7         2.8          6.7         2.0  virginica
+124          6.3         2.7          4.9         1.8  virginica
+125          6.7         3.3          5.7         2.1  virginica
+126          7.2         3.2          6.0         1.8  virginica
+127          6.2         2.8          4.8         1.8  virginica
+128          6.1         3.0          4.9         1.8  virginica
+129          6.4         2.8          5.6         2.1  virginica
+130          7.2         3.0          5.8         1.6  virginica
+131          7.4         2.8          6.1         1.9  virginica
+132          7.9         3.8          6.4         2.0  virginica
+133          6.4         2.8          5.6         2.2  virginica
+134          6.3         2.8          5.1         1.5  virginica
+135          6.1         2.6          5.6         1.4  virginica
+136          7.7         3.0          6.1         2.3  virginica
+137          6.3         3.4          5.6         2.4  virginica
+138          6.4         3.1          5.5         1.8  virginica
+139          6.0         3.0          4.8         1.8  virginica
+140          6.9         3.1          5.4         2.1  virginica
+141          6.7         3.1          5.6         2.4  virginica
+142          6.9         3.1          5.1         2.3  virginica
+143          5.8         2.7          5.1         1.9  virginica
+144          6.8         3.2          5.9         2.3  virginica
+145          6.7         3.3          5.7         2.5  virginica
+146          6.7         3.0          5.2         2.3  virginica
+147          6.3         2.5          5.0         1.9  virginica
+148          6.5         3.0          5.2         2.0  virginica
+149          6.2         3.4          5.4         2.3  virginica
+150          5.9         3.0          5.1         1.8  virginica
+                      Code
+1       spc_setosa_1.4_0.2
+2       spc_setosa_1.4_0.2
+3       spc_setosa_1.3_0.2
+4       spc_setosa_1.5_0.2
+5       spc_setosa_1.4_0.2
+6       spc_setosa_1.7_0.4
+7       spc_setosa_1.4_0.3
+8       spc_setosa_1.5_0.2
+9       spc_setosa_1.4_0.2
+10      spc_setosa_1.5_0.1
+11      spc_setosa_1.5_0.2
+12      spc_setosa_1.6_0.2
+13      spc_setosa_1.4_0.1
+14      spc_setosa_1.1_0.1
+15      spc_setosa_1.2_0.2
+16      spc_setosa_1.5_0.4
+17      spc_setosa_1.3_0.4
+18      spc_setosa_1.4_0.3
+19      spc_setosa_1.7_0.3
+20      spc_setosa_1.5_0.3
+21      spc_setosa_1.7_0.2
+22      spc_setosa_1.5_0.4
+23        spc_setosa_1_0.2
+24      spc_setosa_1.7_0.5
+25      spc_setosa_1.9_0.2
+26      spc_setosa_1.6_0.2
+27      spc_setosa_1.6_0.4
+28      spc_setosa_1.5_0.2
+29      spc_setosa_1.4_0.2
+30      spc_setosa_1.6_0.2
+31      spc_setosa_1.6_0.2
+32      spc_setosa_1.5_0.4
+33      spc_setosa_1.5_0.1
+34      spc_setosa_1.4_0.2
+35      spc_setosa_1.5_0.2
+36      spc_setosa_1.2_0.2
+37      spc_setosa_1.3_0.2
+38      spc_setosa_1.4_0.1
+39      spc_setosa_1.3_0.2
+40      spc_setosa_1.5_0.2
+41      spc_setosa_1.3_0.3
+42      spc_setosa_1.3_0.3
+43      spc_setosa_1.3_0.2
+44      spc_setosa_1.6_0.6
+45      spc_setosa_1.9_0.4
+46      spc_setosa_1.4_0.3
+47      spc_setosa_1.6_0.2
+48      spc_setosa_1.4_0.2
+49      spc_setosa_1.5_0.2
+50      spc_setosa_1.4_0.2
+51  spc_versicolor_4.7_1.4
+52  spc_versicolor_4.5_1.5
+53  spc_versicolor_4.9_1.5
+54    spc_versicolor_4_1.3
+55  spc_versicolor_4.6_1.5
+56  spc_versicolor_4.5_1.3
+57  spc_versicolor_4.7_1.6
+58    spc_versicolor_3.3_1
+59  spc_versicolor_4.6_1.3
+60  spc_versicolor_3.9_1.4
+61    spc_versicolor_3.5_1
+62  spc_versicolor_4.2_1.5
+63      spc_versicolor_4_1
+64  spc_versicolor_4.7_1.4
+65  spc_versicolor_3.6_1.3
+66  spc_versicolor_4.4_1.4
+67  spc_versicolor_4.5_1.5
+68    spc_versicolor_4.1_1
+69  spc_versicolor_4.5_1.5
+70  spc_versicolor_3.9_1.1
+71  spc_versicolor_4.8_1.8
+72    spc_versicolor_4_1.3
+73  spc_versicolor_4.9_1.5
+74  spc_versicolor_4.7_1.2
+75  spc_versicolor_4.3_1.3
+76  spc_versicolor_4.4_1.4
+77  spc_versicolor_4.8_1.4
+78    spc_versicolor_5_1.7
+79  spc_versicolor_4.5_1.5
+80    spc_versicolor_3.5_1
+81  spc_versicolor_3.8_1.1
+82    spc_versicolor_3.7_1
+83  spc_versicolor_3.9_1.2
+84  spc_versicolor_5.1_1.6
+85  spc_versicolor_4.5_1.5
+86  spc_versicolor_4.5_1.6
+87  spc_versicolor_4.7_1.5
+88  spc_versicolor_4.4_1.3
+89  spc_versicolor_4.1_1.3
+90    spc_versicolor_4_1.3
+91  spc_versicolor_4.4_1.2
+92  spc_versicolor_4.6_1.4
+93    spc_versicolor_4_1.2
+94    spc_versicolor_3.3_1
+95  spc_versicolor_4.2_1.3
+96  spc_versicolor_4.2_1.2
+97  spc_versicolor_4.2_1.3
+98  spc_versicolor_4.3_1.3
+99    spc_versicolor_3_1.1
+100 spc_versicolor_4.1_1.3
+101    spc_virginica_6_2.5
+102  spc_virginica_5.1_1.9
+103  spc_virginica_5.9_2.1
+104  spc_virginica_5.6_1.8
+105  spc_virginica_5.8_2.2
+106  spc_virginica_6.6_2.1
+107  spc_virginica_4.5_1.7
+108  spc_virginica_6.3_1.8
+109  spc_virginica_5.8_1.8
+110  spc_virginica_6.1_2.5
+111    spc_virginica_5.1_2
+112  spc_virginica_5.3_1.9
+113  spc_virginica_5.5_2.1
+114      spc_virginica_5_2
+115  spc_virginica_5.1_2.4
+116  spc_virginica_5.3_2.3
+117  spc_virginica_5.5_1.8
+118  spc_virginica_6.7_2.2
+119  spc_virginica_6.9_2.3
+120    spc_virginica_5_1.5
+121  spc_virginica_5.7_2.3
+122    spc_virginica_4.9_2
+123    spc_virginica_6.7_2
+124  spc_virginica_4.9_1.8
+125  spc_virginica_5.7_2.1
+126    spc_virginica_6_1.8
+127  spc_virginica_4.8_1.8
+128  spc_virginica_4.9_1.8
+129  spc_virginica_5.6_2.1
+130  spc_virginica_5.8_1.6
+131  spc_virginica_6.1_1.9
+132    spc_virginica_6.4_2
+133  spc_virginica_5.6_2.2
+134  spc_virginica_5.1_1.5
+135  spc_virginica_5.6_1.4
+136  spc_virginica_6.1_2.3
+137  spc_virginica_5.6_2.4
+138  spc_virginica_5.5_1.8
+139  spc_virginica_4.8_1.8
+140  spc_virginica_5.4_2.1
+141  spc_virginica_5.6_2.4
+142  spc_virginica_5.1_2.3
+143  spc_virginica_5.1_1.9
+144  spc_virginica_5.9_2.3
+145  spc_virginica_5.7_2.5
+146  spc_virginica_5.2_2.3
+147    spc_virginica_5_1.9
+148    spc_virginica_5.2_2
+149  spc_virginica_5.4_2.3
+150  spc_virginica_5.1_1.8</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Code =</span> glue<span class="sc">:::</span><span class="fu">glue</span>(<span class="st">"Spc:{Species}_Len:{Petal.Length}_Wid:{Petal.Width}"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            5.1         3.5          1.4         0.2     setosa
+2            4.9         3.0          1.4         0.2     setosa
+3            4.7         3.2          1.3         0.2     setosa
+4            4.6         3.1          1.5         0.2     setosa
+5            5.0         3.6          1.4         0.2     setosa
+6            5.4         3.9          1.7         0.4     setosa
+7            4.6         3.4          1.4         0.3     setosa
+8            5.0         3.4          1.5         0.2     setosa
+9            4.4         2.9          1.4         0.2     setosa
+10           4.9         3.1          1.5         0.1     setosa
+11           5.4         3.7          1.5         0.2     setosa
+12           4.8         3.4          1.6         0.2     setosa
+13           4.8         3.0          1.4         0.1     setosa
+14           4.3         3.0          1.1         0.1     setosa
+15           5.8         4.0          1.2         0.2     setosa
+16           5.7         4.4          1.5         0.4     setosa
+17           5.4         3.9          1.3         0.4     setosa
+18           5.1         3.5          1.4         0.3     setosa
+19           5.7         3.8          1.7         0.3     setosa
+20           5.1         3.8          1.5         0.3     setosa
+21           5.4         3.4          1.7         0.2     setosa
+22           5.1         3.7          1.5         0.4     setosa
+23           4.6         3.6          1.0         0.2     setosa
+24           5.1         3.3          1.7         0.5     setosa
+25           4.8         3.4          1.9         0.2     setosa
+26           5.0         3.0          1.6         0.2     setosa
+27           5.0         3.4          1.6         0.4     setosa
+28           5.2         3.5          1.5         0.2     setosa
+29           5.2         3.4          1.4         0.2     setosa
+30           4.7         3.2          1.6         0.2     setosa
+31           4.8         3.1          1.6         0.2     setosa
+32           5.4         3.4          1.5         0.4     setosa
+33           5.2         4.1          1.5         0.1     setosa
+34           5.5         4.2          1.4         0.2     setosa
+35           4.9         3.1          1.5         0.2     setosa
+36           5.0         3.2          1.2         0.2     setosa
+37           5.5         3.5          1.3         0.2     setosa
+38           4.9         3.6          1.4         0.1     setosa
+39           4.4         3.0          1.3         0.2     setosa
+40           5.1         3.4          1.5         0.2     setosa
+41           5.0         3.5          1.3         0.3     setosa
+42           4.5         2.3          1.3         0.3     setosa
+43           4.4         3.2          1.3         0.2     setosa
+44           5.0         3.5          1.6         0.6     setosa
+45           5.1         3.8          1.9         0.4     setosa
+46           4.8         3.0          1.4         0.3     setosa
+47           5.1         3.8          1.6         0.2     setosa
+48           4.6         3.2          1.4         0.2     setosa
+49           5.3         3.7          1.5         0.2     setosa
+50           5.0         3.3          1.4         0.2     setosa
+51           7.0         3.2          4.7         1.4 versicolor
+52           6.4         3.2          4.5         1.5 versicolor
+53           6.9         3.1          4.9         1.5 versicolor
+54           5.5         2.3          4.0         1.3 versicolor
+55           6.5         2.8          4.6         1.5 versicolor
+56           5.7         2.8          4.5         1.3 versicolor
+57           6.3         3.3          4.7         1.6 versicolor
+58           4.9         2.4          3.3         1.0 versicolor
+59           6.6         2.9          4.6         1.3 versicolor
+60           5.2         2.7          3.9         1.4 versicolor
+61           5.0         2.0          3.5         1.0 versicolor
+62           5.9         3.0          4.2         1.5 versicolor
+63           6.0         2.2          4.0         1.0 versicolor
+64           6.1         2.9          4.7         1.4 versicolor
+65           5.6         2.9          3.6         1.3 versicolor
+66           6.7         3.1          4.4         1.4 versicolor
+67           5.6         3.0          4.5         1.5 versicolor
+68           5.8         2.7          4.1         1.0 versicolor
+69           6.2         2.2          4.5         1.5 versicolor
+70           5.6         2.5          3.9         1.1 versicolor
+71           5.9         3.2          4.8         1.8 versicolor
+72           6.1         2.8          4.0         1.3 versicolor
+73           6.3         2.5          4.9         1.5 versicolor
+74           6.1         2.8          4.7         1.2 versicolor
+75           6.4         2.9          4.3         1.3 versicolor
+76           6.6         3.0          4.4         1.4 versicolor
+77           6.8         2.8          4.8         1.4 versicolor
+78           6.7         3.0          5.0         1.7 versicolor
+79           6.0         2.9          4.5         1.5 versicolor
+80           5.7         2.6          3.5         1.0 versicolor
+81           5.5         2.4          3.8         1.1 versicolor
+82           5.5         2.4          3.7         1.0 versicolor
+83           5.8         2.7          3.9         1.2 versicolor
+84           6.0         2.7          5.1         1.6 versicolor
+85           5.4         3.0          4.5         1.5 versicolor
+86           6.0         3.4          4.5         1.6 versicolor
+87           6.7         3.1          4.7         1.5 versicolor
+88           6.3         2.3          4.4         1.3 versicolor
+89           5.6         3.0          4.1         1.3 versicolor
+90           5.5         2.5          4.0         1.3 versicolor
+91           5.5         2.6          4.4         1.2 versicolor
+92           6.1         3.0          4.6         1.4 versicolor
+93           5.8         2.6          4.0         1.2 versicolor
+94           5.0         2.3          3.3         1.0 versicolor
+95           5.6         2.7          4.2         1.3 versicolor
+96           5.7         3.0          4.2         1.2 versicolor
+97           5.7         2.9          4.2         1.3 versicolor
+98           6.2         2.9          4.3         1.3 versicolor
+99           5.1         2.5          3.0         1.1 versicolor
+100          5.7         2.8          4.1         1.3 versicolor
+101          6.3         3.3          6.0         2.5  virginica
+102          5.8         2.7          5.1         1.9  virginica
+103          7.1         3.0          5.9         2.1  virginica
+104          6.3         2.9          5.6         1.8  virginica
+105          6.5         3.0          5.8         2.2  virginica
+106          7.6         3.0          6.6         2.1  virginica
+107          4.9         2.5          4.5         1.7  virginica
+108          7.3         2.9          6.3         1.8  virginica
+109          6.7         2.5          5.8         1.8  virginica
+110          7.2         3.6          6.1         2.5  virginica
+111          6.5         3.2          5.1         2.0  virginica
+112          6.4         2.7          5.3         1.9  virginica
+113          6.8         3.0          5.5         2.1  virginica
+114          5.7         2.5          5.0         2.0  virginica
+115          5.8         2.8          5.1         2.4  virginica
+116          6.4         3.2          5.3         2.3  virginica
+117          6.5         3.0          5.5         1.8  virginica
+118          7.7         3.8          6.7         2.2  virginica
+119          7.7         2.6          6.9         2.3  virginica
+120          6.0         2.2          5.0         1.5  virginica
+121          6.9         3.2          5.7         2.3  virginica
+122          5.6         2.8          4.9         2.0  virginica
+123          7.7         2.8          6.7         2.0  virginica
+124          6.3         2.7          4.9         1.8  virginica
+125          6.7         3.3          5.7         2.1  virginica
+126          7.2         3.2          6.0         1.8  virginica
+127          6.2         2.8          4.8         1.8  virginica
+128          6.1         3.0          4.9         1.8  virginica
+129          6.4         2.8          5.6         2.1  virginica
+130          7.2         3.0          5.8         1.6  virginica
+131          7.4         2.8          6.1         1.9  virginica
+132          7.9         3.8          6.4         2.0  virginica
+133          6.4         2.8          5.6         2.2  virginica
+134          6.3         2.8          5.1         1.5  virginica
+135          6.1         2.6          5.6         1.4  virginica
+136          7.7         3.0          6.1         2.3  virginica
+137          6.3         3.4          5.6         2.4  virginica
+138          6.4         3.1          5.5         1.8  virginica
+139          6.0         3.0          4.8         1.8  virginica
+140          6.9         3.1          5.4         2.1  virginica
+141          6.7         3.1          5.6         2.4  virginica
+142          6.9         3.1          5.1         2.3  virginica
+143          5.8         2.7          5.1         1.9  virginica
+144          6.8         3.2          5.9         2.3  virginica
+145          6.7         3.3          5.7         2.5  virginica
+146          6.7         3.0          5.2         2.3  virginica
+147          6.3         2.5          5.0         1.9  virginica
+148          6.5         3.0          5.2         2.0  virginica
+149          6.2         3.4          5.4         2.3  virginica
+150          5.9         3.0          5.1         1.8  virginica
+                              Code
+1       Spc:setosa_Len:1.4_Wid:0.2
+2       Spc:setosa_Len:1.4_Wid:0.2
+3       Spc:setosa_Len:1.3_Wid:0.2
+4       Spc:setosa_Len:1.5_Wid:0.2
+5       Spc:setosa_Len:1.4_Wid:0.2
+6       Spc:setosa_Len:1.7_Wid:0.4
+7       Spc:setosa_Len:1.4_Wid:0.3
+8       Spc:setosa_Len:1.5_Wid:0.2
+9       Spc:setosa_Len:1.4_Wid:0.2
+10      Spc:setosa_Len:1.5_Wid:0.1
+11      Spc:setosa_Len:1.5_Wid:0.2
+12      Spc:setosa_Len:1.6_Wid:0.2
+13      Spc:setosa_Len:1.4_Wid:0.1
+14      Spc:setosa_Len:1.1_Wid:0.1
+15      Spc:setosa_Len:1.2_Wid:0.2
+16      Spc:setosa_Len:1.5_Wid:0.4
+17      Spc:setosa_Len:1.3_Wid:0.4
+18      Spc:setosa_Len:1.4_Wid:0.3
+19      Spc:setosa_Len:1.7_Wid:0.3
+20      Spc:setosa_Len:1.5_Wid:0.3
+21      Spc:setosa_Len:1.7_Wid:0.2
+22      Spc:setosa_Len:1.5_Wid:0.4
+23        Spc:setosa_Len:1_Wid:0.2
+24      Spc:setosa_Len:1.7_Wid:0.5
+25      Spc:setosa_Len:1.9_Wid:0.2
+26      Spc:setosa_Len:1.6_Wid:0.2
+27      Spc:setosa_Len:1.6_Wid:0.4
+28      Spc:setosa_Len:1.5_Wid:0.2
+29      Spc:setosa_Len:1.4_Wid:0.2
+30      Spc:setosa_Len:1.6_Wid:0.2
+31      Spc:setosa_Len:1.6_Wid:0.2
+32      Spc:setosa_Len:1.5_Wid:0.4
+33      Spc:setosa_Len:1.5_Wid:0.1
+34      Spc:setosa_Len:1.4_Wid:0.2
+35      Spc:setosa_Len:1.5_Wid:0.2
+36      Spc:setosa_Len:1.2_Wid:0.2
+37      Spc:setosa_Len:1.3_Wid:0.2
+38      Spc:setosa_Len:1.4_Wid:0.1
+39      Spc:setosa_Len:1.3_Wid:0.2
+40      Spc:setosa_Len:1.5_Wid:0.2
+41      Spc:setosa_Len:1.3_Wid:0.3
+42      Spc:setosa_Len:1.3_Wid:0.3
+43      Spc:setosa_Len:1.3_Wid:0.2
+44      Spc:setosa_Len:1.6_Wid:0.6
+45      Spc:setosa_Len:1.9_Wid:0.4
+46      Spc:setosa_Len:1.4_Wid:0.3
+47      Spc:setosa_Len:1.6_Wid:0.2
+48      Spc:setosa_Len:1.4_Wid:0.2
+49      Spc:setosa_Len:1.5_Wid:0.2
+50      Spc:setosa_Len:1.4_Wid:0.2
+51  Spc:versicolor_Len:4.7_Wid:1.4
+52  Spc:versicolor_Len:4.5_Wid:1.5
+53  Spc:versicolor_Len:4.9_Wid:1.5
+54    Spc:versicolor_Len:4_Wid:1.3
+55  Spc:versicolor_Len:4.6_Wid:1.5
+56  Spc:versicolor_Len:4.5_Wid:1.3
+57  Spc:versicolor_Len:4.7_Wid:1.6
+58    Spc:versicolor_Len:3.3_Wid:1
+59  Spc:versicolor_Len:4.6_Wid:1.3
+60  Spc:versicolor_Len:3.9_Wid:1.4
+61    Spc:versicolor_Len:3.5_Wid:1
+62  Spc:versicolor_Len:4.2_Wid:1.5
+63      Spc:versicolor_Len:4_Wid:1
+64  Spc:versicolor_Len:4.7_Wid:1.4
+65  Spc:versicolor_Len:3.6_Wid:1.3
+66  Spc:versicolor_Len:4.4_Wid:1.4
+67  Spc:versicolor_Len:4.5_Wid:1.5
+68    Spc:versicolor_Len:4.1_Wid:1
+69  Spc:versicolor_Len:4.5_Wid:1.5
+70  Spc:versicolor_Len:3.9_Wid:1.1
+71  Spc:versicolor_Len:4.8_Wid:1.8
+72    Spc:versicolor_Len:4_Wid:1.3
+73  Spc:versicolor_Len:4.9_Wid:1.5
+74  Spc:versicolor_Len:4.7_Wid:1.2
+75  Spc:versicolor_Len:4.3_Wid:1.3
+76  Spc:versicolor_Len:4.4_Wid:1.4
+77  Spc:versicolor_Len:4.8_Wid:1.4
+78    Spc:versicolor_Len:5_Wid:1.7
+79  Spc:versicolor_Len:4.5_Wid:1.5
+80    Spc:versicolor_Len:3.5_Wid:1
+81  Spc:versicolor_Len:3.8_Wid:1.1
+82    Spc:versicolor_Len:3.7_Wid:1
+83  Spc:versicolor_Len:3.9_Wid:1.2
+84  Spc:versicolor_Len:5.1_Wid:1.6
+85  Spc:versicolor_Len:4.5_Wid:1.5
+86  Spc:versicolor_Len:4.5_Wid:1.6
+87  Spc:versicolor_Len:4.7_Wid:1.5
+88  Spc:versicolor_Len:4.4_Wid:1.3
+89  Spc:versicolor_Len:4.1_Wid:1.3
+90    Spc:versicolor_Len:4_Wid:1.3
+91  Spc:versicolor_Len:4.4_Wid:1.2
+92  Spc:versicolor_Len:4.6_Wid:1.4
+93    Spc:versicolor_Len:4_Wid:1.2
+94    Spc:versicolor_Len:3.3_Wid:1
+95  Spc:versicolor_Len:4.2_Wid:1.3
+96  Spc:versicolor_Len:4.2_Wid:1.2
+97  Spc:versicolor_Len:4.2_Wid:1.3
+98  Spc:versicolor_Len:4.3_Wid:1.3
+99    Spc:versicolor_Len:3_Wid:1.1
+100 Spc:versicolor_Len:4.1_Wid:1.3
+101    Spc:virginica_Len:6_Wid:2.5
+102  Spc:virginica_Len:5.1_Wid:1.9
+103  Spc:virginica_Len:5.9_Wid:2.1
+104  Spc:virginica_Len:5.6_Wid:1.8
+105  Spc:virginica_Len:5.8_Wid:2.2
+106  Spc:virginica_Len:6.6_Wid:2.1
+107  Spc:virginica_Len:4.5_Wid:1.7
+108  Spc:virginica_Len:6.3_Wid:1.8
+109  Spc:virginica_Len:5.8_Wid:1.8
+110  Spc:virginica_Len:6.1_Wid:2.5
+111    Spc:virginica_Len:5.1_Wid:2
+112  Spc:virginica_Len:5.3_Wid:1.9
+113  Spc:virginica_Len:5.5_Wid:2.1
+114      Spc:virginica_Len:5_Wid:2
+115  Spc:virginica_Len:5.1_Wid:2.4
+116  Spc:virginica_Len:5.3_Wid:2.3
+117  Spc:virginica_Len:5.5_Wid:1.8
+118  Spc:virginica_Len:6.7_Wid:2.2
+119  Spc:virginica_Len:6.9_Wid:2.3
+120    Spc:virginica_Len:5_Wid:1.5
+121  Spc:virginica_Len:5.7_Wid:2.3
+122    Spc:virginica_Len:4.9_Wid:2
+123    Spc:virginica_Len:6.7_Wid:2
+124  Spc:virginica_Len:4.9_Wid:1.8
+125  Spc:virginica_Len:5.7_Wid:2.1
+126    Spc:virginica_Len:6_Wid:1.8
+127  Spc:virginica_Len:4.8_Wid:1.8
+128  Spc:virginica_Len:4.9_Wid:1.8
+129  Spc:virginica_Len:5.6_Wid:2.1
+130  Spc:virginica_Len:5.8_Wid:1.6
+131  Spc:virginica_Len:6.1_Wid:1.9
+132    Spc:virginica_Len:6.4_Wid:2
+133  Spc:virginica_Len:5.6_Wid:2.2
+134  Spc:virginica_Len:5.1_Wid:1.5
+135  Spc:virginica_Len:5.6_Wid:1.4
+136  Spc:virginica_Len:6.1_Wid:2.3
+137  Spc:virginica_Len:5.6_Wid:2.4
+138  Spc:virginica_Len:5.5_Wid:1.8
+139  Spc:virginica_Len:4.8_Wid:1.8
+140  Spc:virginica_Len:5.4_Wid:2.1
+141  Spc:virginica_Len:5.6_Wid:2.4
+142  Spc:virginica_Len:5.1_Wid:2.3
+143  Spc:virginica_Len:5.1_Wid:1.9
+144  Spc:virginica_Len:5.9_Wid:2.3
+145  Spc:virginica_Len:5.7_Wid:2.5
+146  Spc:virginica_Len:5.2_Wid:2.3
+147    Spc:virginica_Len:5_Wid:1.9
+148    Spc:virginica_Len:5.2_Wid:2
+149  Spc:virginica_Len:5.4_Wid:2.3
+150  Spc:virginica_Len:5.1_Wid:1.8</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
