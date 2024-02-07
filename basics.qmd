@@ -179,7 +179,7 @@ iris %>% filter(Species != "setosa")
 iris %>% filter(Species %in% c("virginica","versicolor"))
 ```
 
-## arrange
+### arrange
 
 Colocar a tabela em ordem (linhas).
 
@@ -232,7 +232,7 @@ iris %>%
 iris %>% arrange(Sepal.Length,desc(Sepal.Width))
 ```
 
-## summarise
+### summarise
 
 Faz
 
