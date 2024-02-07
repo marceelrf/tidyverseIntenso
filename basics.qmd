@@ -2,17 +2,18 @@
 
 ## `{dplyr}` verbs
 
--   `mutate`
+-   `mutate()`
 
--   `filter`
+-   `filter()`
 
--   `select`
+-   `select()`
 
--   `arrange`
+-   `arrange()`
 
--   `summarise`
+-   `summarise()`
 
 ```{r}
+#| rows.print=12
 iris
 ```
 
@@ -21,6 +22,7 @@ library(dplyr)
 ```
 
 ```{r}
+#| rows.print=12
 dplyr::glimpse(iris)
 ```
 
@@ -31,42 +33,209 @@ A=\pi lw
 $$
 
 ```{r}
+#| rows.print=12
 mutate(.data = iris, area_Sepal = pi*Sepal.Length*Sepal.Width)
 ```
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(area_Sepal = pi*Sepal.Length*Sepal.Width)
 ```
 
 Você errou a coluna `petal.lenght` e precisa multiplicar por 2.
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(Petal.Length = Petal.Length*2)
 ```
 
 Usando informações externas
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(reino = "planta")
 ```
 
 ```{r,eval=FALSE}
+#| rows.print=12
 iris %>% mutate(reino = c("planta","fungo"))
 ```
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(reino = 1:150)
 ```
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(reino = rep(LETTERS[1:5],30))
 ```
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(Code = paste("spc",Species,Petal.Length,Petal.Width,
                              sep = '_'))
 ```
 
 ```{r}
+#| rows.print=12
 iris %>% mutate(Code = glue:::glue("Spc:{Species}_Len:{Petal.Length}_Wid:{Petal.Width}"))
+```
+
+### select
+
+Serve para selecionar colunas (variaveis).
+
+Nota: se você estiver trabalhando com `bioconductor` recomendo usar `dplyr::select()`
+
+```{r}
+#| rows.print=12
+select(iris, Sepal.Length)
+```
+
+```{r}
+#| rows.print=12
+select(iris, Sepal.Length,Sepal.Width)
+```
+
+```{r}
+#| rows.print=12
+#select(iris, Sepal.Length,Sepal.Width)
+iris %>% select(Length = Sepal.Length,
+                Width = Sepal.Width)
+```
+
+```{r}
+#| rows.print=12
+iris %>% select(starts_with("Sepal"))
+```
+
+```{r}
+#| rows.print=12
+iris %>% select(ends_with("Width"))
+```
+
+```{r}
+#| rows.print=12
+iris %>% select(Species,ends_with("Width"))
+```
+
+```{r}
+#| rows.print=12
+#Não faz muito sentido usar isso - Ou usar o que o icaro disse
+(iris_2 <- iris %>% select(2))
+```
+
+```{r}
+#| rows.print=12
+iris_v2 <- iris[,2]
+```
+
+### pull() - extrai o vetor
+
+```{r}
+#| rows.print=12
+iris %>% pull(Sepal.Width)
+```
+
+```{r}
+#| rows.print=12
+pull(iris_2)
+```
+
+### filter
+
+Filtra linhas de uma tabela
+
+```{r}
+#| rows.print=12
+iris
+iris %>% filter(Sepal.Length >= 4.7)
+```
+
+```{r}
+#| rows.print=12
+iris %>% filter(Sepal.Length >= 4.7,
+                Petal.Length < 1.5)
+```
+
+```{r}
+#| rows.print=12
+iris %>% filter(Sepal.Length >= 4.7 | Petal.Length < 1.5)
+```
+
+```{r}
+#| rows.print=12
+iris %>% filter(Species == "setosa")
+```
+
+```{r}
+#| rows.print=12
+iris %>% filter(Species != "setosa")
+```
+
+```{r}
+#| rows.print=12
+iris %>% filter(Species %in% c("virginica","versicolor"))
+```
+
+## arrange
+
+Colocar a tabela em ordem (linhas).
+
+```{r}
+#| rows.print=12
+iris %>% arrange(Sepal.Length)
+```
+
+```{r}
+#| rows.print=12
+iris %>% arrange(desc(Sepal.Length))
+```
+
+```{r}
+#| rows.print=12
+iris %>% arrange(desc(Species))
+```
+
+```{r}
+#| rows.print=12
+
+#Não quer a ordem alfabética
+
+(iris_fct <- iris %>% mutate(Species = factor(Species,levels = c("versicolor","setosa","virginica"))))
+
+```
+
+```{r}
+#| rows.print=12
+iris$Species
+iris_fct$Species
+```
+
+```{r}
+#| rows.print=12
+iris_fct %>% 
+  arrange(Species)
+```
+
+```{r}
+#| rows.print=12
+iris %>% 
+  mutate(Species = factor(Species,levels = c("versicolor","setosa","virginica"))) %>% 
+  arrange(Species)
+```
+
+```{r}
+#| rows.print=12
+
+iris %>% arrange(Sepal.Length,desc(Sepal.Width))
+```
+
+## summarise
+
+Faz
+
+```{r}
+#| rows.print=12
 ```

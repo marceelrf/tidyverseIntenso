@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: ead51124-c991-4b45-b4ab-7d820c32f31b
+      url: 'https://tiyverse-intensivo-mrf.netlify.app'
