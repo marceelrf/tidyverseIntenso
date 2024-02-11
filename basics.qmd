@@ -1,5 +1,17 @@
 ## Tidyverse basics
 
+Chapter 2: Introduction to the Basic Tidyverse
+
+Welcome to Chapter 2 of our tutorial on the tidyverse! In this chapter, we delve into the heart of data manipulation with R using the basic tidyverse packages, particularly focusing on the fundamental functionalities of dplyr.
+
+The tidyverse, a collection of R packages designed for data science, has revolutionized the way we work with data in R. At its core, the tidyverse emphasizes clarity, simplicity, and consistency, making it easier for users to manipulate, visualize, and model data effectively.
+
+In this chapter, we'll explore the basic dplyr verbs, which serve as the building blocks for data manipulation tasks. These verbs provide intuitive and powerful tools for transforming, summarizing, filtering, and arranging data, enabling you to perform complex data manipulations with ease.
+
+Whether you're new to R or looking to streamline your data analysis workflow, mastering the basic tidyverse tools will empower you to tackle real-world data challenges efficiently and effectively. By the end of this chapter, you'll have a solid understanding of how to use dplyr to wrangle, clean, and explore your data, setting the stage for more advanced analyses in subsequent chapters.
+
+So, let's dive in and uncover the power of the basic tidyverse, starting with the essential dplyr verbs that form the backbone of data manipulation in R. Get ready to unleash the full potential of your data with the tidyverse!
+
 ## `{dplyr}` verbs
 
 -   `mutate()`
