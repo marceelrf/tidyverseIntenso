@@ -1,6 +1,5 @@
 ## Tidyverse basics
 
-Chapter 2: Introduction to the Basic Tidyverse
 
 Welcome to Chapter 2 of our tutorial on the tidyverse! In this chapter, we delve into the heart of data manipulation with R using the basic tidyverse packages, particularly focusing on the fundamental functionalities of dplyr.
 
