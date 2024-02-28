@@ -1,6 +1,5 @@
 ## Tidyverse basics
 
-
 Welcome to Chapter 2 of our tutorial on the tidyverse! In this chapter, we delve into the heart of data manipulation with R using the basic tidyverse packages, particularly focusing on the fundamental functionalities of dplyr.
 
 The tidyverse, a collection of R packages designed for data science, has revolutionized the way we work with data in R. At its core, the tidyverse emphasizes clarity, simplicity, and consistency, making it easier for users to manipulate, visualize, and model data effectively.
@@ -245,8 +244,155 @@ iris %>% arrange(Sepal.Length,desc(Sepal.Width))
 
 ### summarise
 
-Faz
+Cria um resumo estatistico
 
 ```{r}
 #| rows.print=12
+
+summarise(iris, 
+          media_sepal_length = mean(Sepal.Length),
+          sd_sepal_length = sd(Sepal.Length))
+
+
+
+```
+
+```{r}
+summary(iris)
+```
+
+```{r}
+iris %>% 
+  count(Species)
+```
+
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  summarise(media_sepal_length = mean(Sepal.Length),
+          sd_sepal_length = sd(Sepal.Length))
+  #ungroup
+```
+
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  ungroup()
+```
+
+```{r}
+#across - mutate & summarise
+
+#?across()
+
+
+q1 <- function(x) {
+  quantile(x, .25)
+}
+
+q3 <- function(x) {
+  quantile(x, .75)
+}
+
+IQR <- function(x) {
+  
+  q3(x) - q1(x)
+}
+
+#Todas as colunas numericas
+iris %>% 
+  summarise(across(.cols = where(is.numeric),
+                   .fns = list(media = mean,
+                               mediana = median,
+                               maximo = max,
+                               minimo = min,
+                               desvpad = sd,
+                               Q1 = q1,
+                               Q3 = q3,
+                               IQR = IQR),
+                   .names = "{.fn}_{.col}"))
+```
+
+```{r}
+iris_stats <- iris %>% 
+  group_by(Species) %>% 
+  summarise(across(.cols = where(is.numeric),
+                   .fns = list(media = mean,
+                               mediana = median,
+                               maximo = max,
+                               minimo = min,
+                               desvpad = sd,
+                               Q1 = q1,
+                               Q3 = q3,
+                               IQR = IQR),
+                   .names = "{.fn}_{.col}"))
+```
+
+## {tidyr}
+
+```{r}
+iris_stats
+```
+
+Longos x amplo (long x wide)
+
+Longo: mais linhas que colunas
+
+Amplo: mais colunas que linhas
+
+### Pivots
+
+```{r}
+library(tidyr)
+(iris_stats_long <- iris_stats %>% 
+  pivot_longer(cols = -Species,
+               names_to = "Colunas",
+               values_to = "Linhas"))
+```
+
+### Separate
+
+```{r}
+(iris_stats_long <- iris_stats_long %>% 
+  separate(col = Colunas,
+           into = c("Stat","Var"),
+           sep = "_") %>% 
+  separate(col = Var,
+           into = c("Org","Metrica"),
+           sep = "\\.") # palavras reservadas
+  )
+```
+
+## {ggplot2}
+
+```{r}
+library(ggplot2)
+iris %>% 
+  tibble::rowid_to_column() %>% 
+  ggplot(aes(x = rowid, y = Sepal.Length)) +
+  geom_line()
+```
+
+```{r}
+iris %>% 
+  tibble::rowid_to_column() %>% 
+  ggplot(aes(x = rowid, y = Sepal.Length)) +
+  geom_line(color = "blue")+
+  geom_line(aes(y = Sepal.Width))
+```
+
+```{r}
+iris %>% 
+  tibble::rowid_to_column() %>% 
+  pivot_longer(cols = starts_with("Sepal"),
+               names_to = "Vars",values_to = "Vals") %>%
+  ggplot(aes(x = rowid, y = Vals, color = Vars)) +
+  geom_line() +
+  facet_wrap(~Vars)
+```
+
+```{r}
+iris_stats_long %>% 
+  pivot_wider(names_from = Metrica,
+              values_from = Linhas)
 ```
